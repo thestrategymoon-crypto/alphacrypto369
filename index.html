@@ -1,0 +1,238 @@
+!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Crypto 369 — Premium Trading Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#C9A84C;--gold-light:#F0D080;--gold-dim:#8B6914;--black:#080808;--dark:#0F0F0F;--card:#141414;--border:#222;--text:#E8E8E8;--muted:#666;--green:#00C896;--red:#FF4444}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+  .grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+  section{position:relative;z-index:1}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.15)}
+  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.05em}
+  .logo span{color:var(--gold)}
+  .nav-tag{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--gold);border:1px solid var(--gold-dim);padding:4px 10px;letter-spacing:.15em}
+  .ticker-wrap{margin-top:57px;background:rgba(201,168,76,0.06);border-bottom:1px solid rgba(201,168,76,0.1);overflow:hidden;padding:9px 0;position:relative;z-index:1}
+  .ticker{display:flex;gap:50px;animation:scroll 25s linear infinite;white-space:nowrap}
+  .ticker-item{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--gold);display:flex;align-items:center;gap:8px;flex-shrink:0}
+  .up{color:var(--green)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 24px 60px;position:relative}
+  .hero-glow{position:absolute;top:30%;left:50%;transform:translateX(-50%);width:500px;height:350px;background:radial-gradient(ellipse,rgba(201,168,76,0.1) 0%,transparent 70%);pointer-events:none}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);padding:6px 16px;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;color:var(--gold);margin-bottom:28px;animation:fadeDown .8s ease both}
+  .hero-badge::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,6vw,4.8rem);line-height:1;letter-spacing:-.02em;margin-bottom:20px;animation:fadeDown .8s .1s ease both}
+  .accent{color:var(--gold)}
+  .dim{opacity:.3}
+  .hero-sub{font-size:.95rem;color:var(--muted);max-width:460px;line-height:1.7;margin-bottom:40px;animation:fadeDown .8s .2s ease both}
+  .hero-stats{display:flex;gap:32px;margin-bottom:40px;animation:fadeDown .8s .3s ease both}
+  .stat{text-align:center}
+  .stat-num{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--gold);display:block}
+  .stat-label{font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+  .hero-cta{display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeDown .8s .4s ease both}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+  .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.05em;padding:15px 36px;text-decoration:none;transition:all .2s}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.35)}
+  .hero-note{font-size:.68rem;color:var(--muted);font-family:'Space Mono',monospace}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);margin:0 24px}
+  .section-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+  .section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,3.5vw,2.5rem);line-height:1.1}
+  .features{padding:80px 24px;max-width:1100px;margin:0 auto}
+  .features-header{margin-bottom:48px}
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;background:var(--border)}
+  .feature-card{background:var(--card);padding:32px 28px;transition:background .2s;position:relative;overflow:hidden}
+  .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
+  .feature-card:hover{background:#1a1a1a}
+  .feature-card:hover::before{opacity:1}
+  .feature-icon{font-size:1.6rem;margin-bottom:14px;display:block}
+  .feature-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:8px}
+  .feature-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+  .feature-tag{display:inline-block;margin-top:10px;font-family:'Space Mono',monospace;font-size:.58rem;color:var(--green);border:1px solid rgba(0,200,150,.3);padding:3px 8px;letter-spacing:.1em}
+  .proof{padding:80px 24px;background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .proof-inner{max-width:1100px;margin:0 auto}
+  .proof-header{margin-bottom:48px}
+  .proof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:24px}
+  .pnl-card{background:var(--card);border:1px solid var(--border);padding:24px 20px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+  .pnl-card:hover{transform:translateY(-4px);border-color:var(--gold-dim)}
+  .pnl-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent)}
+  .pnl-pair{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+  .pnl-leverage{background:rgba(201,168,76,.1);color:var(--gold);padding:2px 6px;font-size:.58rem;border:1px solid rgba(201,168,76,.2)}
+  .pnl-roi{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--green);line-height:1;margin-bottom:14px}
+  .pnl-detail{display:flex;gap:20px}
+  .pnl-detail-item label{display:block;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+  .pnl-detail-item span{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--text)}
+  .pnl-member{margin-top:14px;font-size:.65rem;color:var(--muted);font-family:'Space Mono',monospace}
+  .proof-disclaimer{background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.15);border-left:3px solid var(--red);padding:14px 18px;font-size:.73rem;color:#999;line-height:1.6}
+  .strategy{padding:80px 24px;max-width:1100px;margin:0 auto}
+  .strategy-list{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border)}
+  .strategy-item{background:var(--card);padding:24px 28px;display:flex;align-items:flex-start;gap:16px}
+  .strategy-num{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--gold-dim);min-width:22px;padding-top:2px}
+  .strategy-text strong{display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:4px}
+  .strategy-text p{font-size:.76rem;color:var(--muted);line-height:1.5}
+  .pricing{padding:80px 24px;background:var(--dark);border-top:1px solid var(--border)}
+  .pricing-inner{max-width:900px;margin:0 auto}
+  .pricing-note{text-align:center;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--gold);margin-bottom:48px;margin-top:10px}
+  .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px;background:var(--border)}
+  .price-card{background:var(--card);padding:36px 28px;display:flex;flex-direction:column;position:relative;transition:background .2s}
+  .price-card:hover{background:#1a1a1a}
+  .price-card.featured{background:#131a0f;outline:2px solid var(--gold);outline-offset:-2px;z-index:1}
+  .price-badge{position:absolute;top:-1px;right:20px;background:var(--gold);color:var(--black);font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;padding:4px 10px;letter-spacing:.1em}
+  .price-tier{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px}
+  .price-original{font-size:.75rem;color:var(--muted);text-decoration:line-through;font-family:'Space Mono',monospace;margin-bottom:4px}
+  .price-main{font-family:'Syne',sans-serif;font-weight:800;font-size:1.9rem;color:var(--text);margin-bottom:4px}
+  .currency{font-size:.9rem;vertical-align:super;color:var(--muted);font-weight:400}
+  .price-period{font-size:.7rem;color:var(--muted);margin-bottom:24px}
+  .price-features{list-style:none;margin-bottom:28px;flex:1}
+  .price-features li{font-size:.76rem;color:#aaa;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:8px}
+  .price-features li::before{content:'✓';color:var(--green);font-size:.68rem;min-width:14px}
+  .price-features li.extra{color:var(--gold)}
+  .btn-join{display:block;text-align:center;padding:13px;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.05em;text-decoration:none;transition:all .2s}
+  .btn-join-outline{border:1px solid var(--gold-dim);color:var(--gold)}
+  .btn-join-outline:hover{background:rgba(201,168,76,.1)}
+  .btn-join-filled{background:var(--gold);color:var(--black)}
+  .btn-join-filled:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .payment{padding:72px 24px;max-width:900px;margin:0 auto}
+  .payment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:36px}
+  .payment-item{background:var(--card);border:1px solid var(--border);padding:18px}
+  .payment-bank{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--gold);margin-bottom:4px}
+  .payment-number{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--text);letter-spacing:.04em;margin-bottom:3px}
+  .payment-name{font-size:.68rem;color:var(--muted)}
+  .payment-warning{margin-top:20px;background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.2);border-left:3px solid var(--red);padding:14px 18px;font-size:.73rem;color:#bbb;line-height:1.7}
+  .risk-section{padding:60px 24px;background:var(--dark);border-top:1px solid var(--border);text-align:center}
+  .risk-box{max-width:640px;margin:0 auto;background:rgba(255,68,68,.04);border:1px solid rgba(255,68,68,.2);padding:28px 32px}
+  .risk-title{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.2em;color:var(--red);margin-bottom:14px}
+  .risk-text{font-size:.78rem;color:#888;line-height:1.8}
+  .final-cta{padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+  .final-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(201,168,76,.07) 0%,transparent 70%);pointer-events:none}
+  .final-cta h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,4.5vw,3rem);margin-bottom:14px;position:relative}
+  .final-cta p{color:var(--muted);font-size:.88rem;margin-bottom:36px;position:relative}
+  footer{padding:28px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:var(--muted);font-family:'Space Mono',monospace}
+  @media(max-width:640px){.hero-stats{gap:20px}footer{flex-direction:column;gap:6px;text-align:center}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <div class="logo">ALPHA<span>CRYPTO</span> 369</div>
+  <div class="nav-tag">PREMIUM GROUP</div>
+</nav>
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">BTC/USDT <span class="up">▲ LIVE</span></span>
+    <span class="ticker-item">ETH/USDT <span class="up">▲ LIVE</span></span>
+    <span class="ticker-item">SOL/USDT <span class="up">▲ LIVE</span></span>
+    <span class="ticker-item">EDGE/USDT <span class="up">+934% ROI</span></span>
+    <span class="ticker-item">24H COVERAGE <span class="up">● AKTIF</span></span>
+    <span class="ticker-item">270+ MEMBER AKTIF</span>
+    <span class="ticker-item">NO HYPE · NO RUMOR · NO FOMO</span>
+    <span class="ticker-item">BTC/USDT <span class="up">▲ LIVE</span></span>
+    <span class="ticker-item">ETH/USDT <span class="up">▲ LIVE</span></span>
+    <span class="ticker-item">SOL/USDT <span class="up">▲ LIVE</span></span>
+    <span class="ticker-item">EDGE/USDT <span class="up">+934% ROI</span></span>
+    <span class="ticker-item">24H COVERAGE <span class="up">● AKTIF</span></span>
+    <span class="ticker-item">270+ MEMBER AKTIF</span>
+    <span class="ticker-item">NO HYPE · NO RUMOR · NO FOMO</span>
+  </div>
+</div>
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">INSTITUTIONAL TRADING FRAMEWORK · 24H MARKET COVERAGE</div>
+  <h1>Trade Seperti<br><span class="accent">Institusi.</span><br><span class="dim">Bukan Spekulan.</span></h1>
+  <p class="hero-sub">Bukan grup sinyal biasa. Framework berbasis struktur market, on-chain data, dan risk management profesional — untuk trader yang serius membangun kapital.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">270+</span><span class="stat-label">Active Members</span></div>
+    <div class="stat"><span class="stat-num">24H</span><span class="stat-label">Market Coverage</span></div>
+    <div class="stat"><span class="stat-num">+934%</span><span class="stat-label">Top Trade ROI</span></div>
+  </div>
+  <div class="hero-cta">
+    <a href="https://t.me/soloadmin369" target="_blank" class="btn-primary">🚀 Join Premium Sekarang</a>
+    <span class="hero-note">PM @soloadmin369 · Konfirmasi dalam 24 jam</span>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="features">
+  <div class="features-header">
+    <div class="section-label">// WHAT YOU GET</div>
+    <h2 class="section-title">Apa Yang Kamu Dapat<br>di Premium Group</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card"><span class="feature-icon">📊</span><div class="feature-title">Daily Scalping Call</div><p class="feature-desc">Entry, risk, dan exit yang jelas. Berbasis struktur price action dan konfirmasi multi-timeframe.</p><span class="feature-tag">FUTURES</span></div>
+    <div class="feature-card"><span class="feature-icon">📈</span><div class="feature-title">Swing Trade Mingguan & Bulanan</div><p class="feature-desc">Setup berbasis momentum sektor dan struktur market. Spot dan futures, timing entry terukur.</p><span class="feature-tag">FUTURES · SPOT</span></div>
+    <div class="feature-card"><span class="feature-icon">🛡️</span><div class="feature-title">Market Insight & Risk Management</div><p class="feature-desc">Bukan hanya entry — capital protection setiap hari. Trader yang survive lebih penting dari yang profit sekali.</p><span class="feature-tag">EVERYDAY</span></div>
+    <div class="feature-card"><span class="feature-icon">🔗</span><div class="feature-title">On-Chain Data Analysis</div><p class="feature-desc">Data institusional: MVRV, SOPR, funding rate, open interest — diinterpretasi untuk konteks pasar saat ini.</p><span class="feature-tag">ADVANCED</span></div>
+    <div class="feature-card"><span class="feature-icon">💬</span><div class="feature-title">Private Telegram Consultation</div><p class="feature-desc">Akses langsung ke mentor untuk diskusi setup, portofolio, atau pertanyaan teknikal.</p><span class="feature-tag">PRIVATE</span></div>
+    <div class="feature-card"><span class="feature-icon">📚</span><div class="feature-title">Professional Trading E-Book</div><p class="feature-desc">Materi komprehensif: SMC/ICT methodology, Supply & Demand, chart patterns, candlestick analysis.</p><span class="feature-tag">INCLUDED</span></div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="proof">
+  <div class="proof-inner">
+    <div class="proof-header">
+      <div class="section-label">// MEMBER RESULTS</div>
+      <h2 class="section-title">Hasil Nyata.<br>Bukan Rekayasa.</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="pnl-card"><div class="pnl-pair">EDGE/USDT <span class="pnl-leverage">Long 25x</span></div><div class="pnl-roi">+934.31%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.6965</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.9568</span></div></div><div class="pnl-member">— Helmy578 · Apr 2025</div></div>
+      <div class="pnl-card"><div class="pnl-pair">STO/USDT <span class="pnl-leverage">Long 15x</span></div><div class="pnl-roi">+574.97%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.12457</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.17232</span></div></div><div class="pnl-member">— Helmy578 · Apr 2025</div></div>
+      <div class="pnl-card"><div class="pnl-pair">ETH/USDT <span class="pnl-leverage">Long 100x</span></div><div class="pnl-roi">+326.07%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>2,040.00</span></div><div class="pnl-detail-item"><label>Exit</label><span>2,106.52</span></div></div><div class="pnl-member">— Ardiii · Apr 2025</div></div>
+    </div>
+    <div class="proof-disclaimer">⚠️ <strong>Catatan:</strong> Hasil menggunakan leverage tinggi. ROI adalah ROI posisi leverage, bukan return modal keseluruhan. Hasil aktual tiap trader berbeda tergantung posisi dan manajemen risiko masing-masing.</div>
+  </div>
+</section>
+<section class="strategy">
+  <div class="section-label">// FRAMEWORK</div>
+  <h2 class="section-title">Strategi Utama</h2>
+  <div class="strategy-list">
+    <div class="strategy-item"><span class="strategy-num">01</span><div class="strategy-text"><strong>Multi-Timeframe Technical Analysis</strong><p>Konfirmasi dari HTF ke LTF. Tidak ada entry tanpa struktur jelas di semua timeframe relevan.</p></div></div>
+    <div class="strategy-item"><span class="strategy-num">02</span><div class="strategy-text"><strong>On-Chain Data Integration</strong><p>Data blockchain sebagai konfirmasi fundamental — evidence-based, bukan spekulasi.</p></div></div>
+    <div class="strategy-item"><span class="strategy-num">03</span><div class="strategy-text"><strong>Structured Futures Execution</strong><p>Entry, SL, dan TP ditentukan sebelum posisi dibuka. Emosi tidak masuk dalam eksekusi.</p></div></div>
+    <div class="strategy-item"><span class="strategy-num">04</span><div class="strategy-text"><strong>Reason-Based Entry & Exit</strong><p>Setiap keputusan ada alasannya. Tidak ada "feeling" — hanya struktur, data, dan probabilitas.</p></div></div>
+    <div class="strategy-item"><span class="strategy-num">05</span><div class="strategy-text"><strong>Advanced Risk & Capital Management</strong><p>Position sizing tepat. Drawdown control. Modal yang terjaga adalah senjata utama trader.</p></div></div>
+    <div class="strategy-item"><span class="strategy-num">06</span><div class="strategy-text"><strong>Market Sector Rotation Analysis</strong><p>Identifikasi sektor yang mendapat inflow institusional — masuk lebih awal, exit lebih bersih.</p></div></div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="pricing">
+  <div class="pricing-inner">
+    <div style="text-align:center"><div class="section-label" style="text-align:center">// PRICE LIST</div><h2 class="section-title">Pilih Paketmu</h2></div>
+    <div class="pricing-note">⚡ Harga founding member — diskon 50%. Naik seiring pertumbuhan komunitas.</div>
+    <div class="pricing-grid">
+      <div class="price-card"><div class="price-tier">2 BULAN</div><div class="price-original">Rp 500.000</div><div class="price-main"><span class="currency">Rp </span>300.000</div><div class="price-period">akses 2 bulan penuh</div><ul class="price-features"><li>Daily Scalping Call</li><li>Market Insight Harian</li><li>Swing Trade Setup</li><li>On-Chain Data Access</li><li>Private Consultation</li></ul><a href="https://t.me/soloadmin369" target="_blank" class="btn-join btn-join-outline">Join Sekarang →</a></div>
+      <div class="price-card featured"><div class="price-badge">POPULER</div><div class="price-tier">6 BULAN</div><div class="price-original">Rp 750.000</div><div class="price-main"><span class="currency">Rp </span>500.000</div><div class="price-period">akses 6 bulan penuh</div><ul class="price-features"><li>Daily Scalping Call</li><li>Market Insight Harian</li><li>Swing Trade Setup</li><li>On-Chain Data Access</li><li>Private Consultation</li><li class="extra">Hemat Rp 250.000</li></ul><a href="https://t.me/soloadmin369" target="_blank" class="btn-join btn-join-filled">Join Sekarang →</a></div>
+      <div class="price-card"><div class="price-tier">LIFETIME</div><div class="price-original" style="opacity:0">—</div><div class="price-main"><span class="currency">Rp </span>2.000.000</div><div class="price-period">akses selamanya</div><ul class="price-features"><li>Semua akses premium</li><li>Daily Scalping Call</li><li>Market Insight Harian</li><li>On-Chain Data Access</li><li>Private Consultation</li><li class="extra">64 E-Book Full Technical Analysis</li></ul><a href="https://t.me/soloadmin369" target="_blank" class="btn-join btn-join-outline">Join Sekarang →</a></div>
+    </div>
+  </div>
+</section>
+<section class="payment">
+  <div class="section-label">// CARA BAYAR</div>
+  <h2 class="section-title">Metode Pembayaran</h2>
+  <div class="payment-grid">
+    <div class="payment-item"><div class="payment-bank">BCA</div><div class="payment-number">7865604211</div><div class="payment-name">Ridho M-M</div></div>
+    <div class="payment-item"><div class="payment-bank">SeaBank</div><div class="payment-number">901299784773</div><div class="payment-name">Ridho M-M</div></div>
+    <div class="payment-item"><div class="payment-bank">GoPay</div><div class="payment-number">081327494460</div><div class="payment-name">Ridho M-M</div></div>
+    <div class="payment-item"><div class="payment-bank">Binance Pay</div><div class="payment-number">202768946</div><div class="payment-name">369 Global</div></div>
+  </div>
+  <div class="payment-warning">⛔ <strong>PERINGATAN:</strong> Hanya transfer ke rekening atas nama di atas. Kirim bukti pembayaran ke <strong>@soloadmin369</strong>.</div>
+</section>
+<section class="risk-section">
+  <div class="risk-box">
+    <div class="risk-title">⚠️ PERINGATAN RISIKO TINGGI</div>
+    <p class="risk-text">Trading cryptocurrency mengandung risiko tinggi dan <strong>tidak menjamin profit</strong>. Kerugian dapat terjadi kapan saja. Grup ini menyediakan edukasi dan analisis — bukan rekomendasi investasi. Gunakan hanya modal yang siap hilang.</p>
+  </div>
+</section>
+<section class="final-cta">
+  <h2>Siap Trade<br><span style="color:var(--gold)">Lebih Serius?</span></h2>
+  <p>Bukan untuk semua orang. Hanya untuk yang benar-benar mau belajar dan disiplin.</p>
+  <a href="https://t.me/soloadmin369" target="_blank" class="btn-primary">💬 PM @soloadmin369 Sekarang</a>
+</section>
+<footer>
+  <span>© 2025 Alpha Crypto 369</span>
+  <span>No hype. No rumor. No FOMO.</span>
+</footer>
+</body>
+</html>
