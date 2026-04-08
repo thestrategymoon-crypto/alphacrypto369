@@ -113,6 +113,26 @@
   .final-cta p{color:var(--muted);font-size:.88rem;margin-bottom:36px;position:relative}
   footer{padding:28px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:var(--muted);font-family:'Space Mono',monospace}
   @media(max-width:640px){.hero-stats{gap:20px}footer{flex-direction:column;gap:6px;text-align:center}}
+  .urgency-bar{position:relative;z-index:2;background:#0a0a0a;border-bottom:1px solid rgba(255,68,68,.3);padding:10px 24px;text-align:center}
+  .urgency-inner{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+  .urgency-dot{width:8px;height:8px;background:var(--red);border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
+  .urgency-text{font-family:'Space Mono',monospace;font-size:.68rem;color:#fff;letter-spacing:.05em}
+  .urgency-text strong{color:var(--red)}
+  .slot-bar-wrap{width:200px;height:6px;background:#222;border-radius:3px;overflow:hidden;flex-shrink:0}
+  .slot-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--red));width:10%;transition:width .5s}
+  .slot-section{padding:60px 24px;background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .slot-inner{max-width:700px;margin:0 auto;text-align:center}
+  .slot-counter{display:flex;align-items:center;justify-content:center;gap:24px;margin:32px 0;flex-wrap:wrap}
+  .slot-num-box{text-align:center}
+  .slot-num{font-family:'Syne',sans-serif;font-weight:800;font-size:3.5rem;line-height:1;display:block}
+  .slot-num.red{color:var(--red)}
+  .slot-num.green{color:var(--green)}
+  .slot-num-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
+  .slot-divider{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--border);padding-top:8px}
+  .slot-progress-wrap{width:100%;max-width:500px;margin:0 auto 24px;height:10px;background:#1a1a1a;border-radius:5px;overflow:hidden}
+  .slot-progress-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--green) 0%,#ffaa00 60%,var(--red) 100%);transition:width 1s ease}
+  .slot-label{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);margin-bottom:32px}
+  .slot-label strong{color:var(--red)}
   .signals{padding:80px 24px;background:var(--dark);border-top:1px solid var(--border)}
   .signals-inner{max-width:1100px;margin:0 auto}
   .signals-header{margin-bottom:48px}
@@ -136,6 +156,13 @@
   <div class="logo">ALPHA<span>CRYPTO</span> 369</div>
   <div class="nav-tag">PREMIUM GROUP</div>
 </nav>
+<div class="urgency-bar">
+  <div class="urgency-inner">
+    <div class="urgency-dot"></div>
+    <span class="urgency-text">⚠️ SLOT TERBATAS — Hanya tersisa <strong id="slot-remain">30</strong> dari 300 slot founding member</span>
+    <div class="slot-bar-wrap"><div class="slot-bar-fill" id="mini-bar"></div></div>
+  </div>
+</div>
 <div class="ticker-wrap">
   <div class="ticker">
     <span class="ticker-item">BTC/USDT <span class="up">▲ LIVE</span></span>
@@ -285,6 +312,33 @@
     <div class="signals-note">📊 <strong>Metodologi:</strong> Semua sinyal berbasis SMC/ICT framework — identifikasi Order Block, Demand Zone, dan konfirmasi BOS/CHoCH pada multi-timeframe. Entry dilakukan setelah konfirmasi struktur, bukan prediksi arah semata.</div>
   </div>
 </section>
+<section class="slot-section">
+  <div class="slot-inner">
+    <div class="section-label" style="text-align:center">// SLOT TERSISA</div>
+    <h2 class="section-title" style="text-align:center">Founding Member<br><span style="color:var(--red)">Hampir Penuh</span></h2>
+    <div class="slot-counter">
+      <div class="slot-num-box">
+        <span class="slot-num green">270</span>
+        <div class="slot-num-label">Sudah Bergabung</div>
+      </div>
+      <div class="slot-divider">/</div>
+      <div class="slot-num-box">
+        <span class="slot-num" style="color:var(--muted)">300</span>
+        <div class="slot-num-label">Total Slot</div>
+      </div>
+      <div class="slot-divider">·</div>
+      <div class="slot-num-box">
+        <span class="slot-num red" id="remaining-slots">30</span>
+        <div class="slot-num-label">Slot Tersisa</div>
+      </div>
+    </div>
+    <div class="slot-progress-wrap">
+      <div class="slot-progress-fill" id="slot-progress" style="width:90%"></div>
+    </div>
+    <p class="slot-label">Ketika slot penuh, harga naik permanen. <strong>Daftar sekarang sebelum terlambat.</strong></p>
+    <a href="https://t.me/soloadmin369" target="_blank" class="btn-primary" style="display:inline-flex;margin:0 auto">🔒 Klaim Slot Sekarang</a>
+  </div>
+</section>
 <div class="divider"></div>
 <section class="pricing">
   <div class="pricing-inner">
@@ -323,5 +377,35 @@
   <span>© 2025 Alpha Crypto 369</span>
   <span>No hype. No rumor. No FOMO.</span>
 </footer>
+<script>
+// Slot counter animation
+window.addEventListener('load', function() {
+  const total = 300;
+  const joined = 270;
+  const remaining = total - joined;
+  const pct = (joined / total) * 100;
+
+  // Update mini bar in urgency strip
+  const miniBar = document.getElementById('mini-bar');
+  if(miniBar) setTimeout(() => miniBar.style.width = pct + '%', 300);
+
+  // Animate remaining slots counting down
+  const remainEl = document.getElementById('remaining-slots');
+  const slotRemainEl = document.getElementById('slot-remain');
+  if(remainEl) {
+    let count = remaining + 8;
+    const interval = setInterval(() => {
+      count--;
+      remainEl.textContent = count;
+      if(slotRemainEl) slotRemainEl.textContent = count;
+      if(count <= remaining) clearInterval(interval);
+    }, 80);
+  }
+
+  // Progress bar
+  const prog = document.getElementById('slot-progress');
+  if(prog) setTimeout(() => prog.style.width = pct + '%', 500);
+});
+</script>
 </body>
 </html>
