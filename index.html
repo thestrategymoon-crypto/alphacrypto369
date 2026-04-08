@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -113,6 +113,21 @@
   .final-cta p{color:var(--muted);font-size:.88rem;margin-bottom:36px;position:relative}
   footer{padding:28px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:var(--muted);font-family:'Space Mono',monospace}
   @media(max-width:640px){.hero-stats{gap:20px}footer{flex-direction:column;gap:6px;text-align:center}}
+  .signals{padding:80px 24px;background:var(--dark);border-top:1px solid var(--border)}
+  .signals-inner{max-width:1100px;margin:0 auto}
+  .signals-header{margin-bottom:48px}
+  .signals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:var(--border);margin-bottom:24px}
+  .signal-card{background:var(--card);padding:20px;position:relative;transition:background .2s}
+  .signal-card:hover{background:#1a1a1a}
+  .signal-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--green)}
+  .signal-pair{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:4px}
+  .signal-tf{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-bottom:12px;letter-spacing:.1em}
+  .signal-row{display:flex;justify-content:space-between;margin-bottom:4px}
+  .signal-label{font-size:.62rem;color:var(--muted);font-family:'Space Mono',monospace}
+  .signal-val{font-size:.72rem;color:var(--text);font-family:'Space Mono',monospace}
+  .signal-roi{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--green);margin-top:10px}
+  .signal-date{font-size:.6rem;color:var(--muted);font-family:'Space Mono',monospace;margin-top:6px}
+  .signals-note{background:rgba(0,200,150,.04);border:1px solid rgba(0,200,150,.15);border-left:3px solid var(--green);padding:14px 18px;font-size:.73rem;color:#999;line-height:1.6}
 </style>
 </head>
 <body>
@@ -147,7 +162,8 @@
   <div class="hero-stats">
     <div class="stat"><span class="stat-num">270+</span><span class="stat-label">Active Members</span></div>
     <div class="stat"><span class="stat-num">24H</span><span class="stat-label">Market Coverage</span></div>
-    <div class="stat"><span class="stat-num">+934%</span><span class="stat-label">Top Trade ROI</span></div>
+    <div class="stat"><span class="stat-num">8</span><span class="stat-label">Signals Apr 2026</span></div>
+    <div class="stat"><span class="stat-num">+934%</span><span class="stat-label">Top ROI</span></div>
   </div>
   <div class="hero-cta">
     <a href="https://t.me/soloadmin369" target="_blank" class="btn-primary">🚀 Join Premium Sekarang</a>
@@ -180,6 +196,11 @@
       <div class="pnl-card"><div class="pnl-pair">EDGE/USDT <span class="pnl-leverage">Long 25x</span></div><div class="pnl-roi">+934.31%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.6965</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.9568</span></div></div><div class="pnl-member">— Helmy578 · Apr 2025</div></div>
       <div class="pnl-card"><div class="pnl-pair">STO/USDT <span class="pnl-leverage">Long 15x</span></div><div class="pnl-roi">+574.97%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.12457</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.17232</span></div></div><div class="pnl-member">— Helmy578 · Apr 2025</div></div>
       <div class="pnl-card"><div class="pnl-pair">ETH/USDT <span class="pnl-leverage">Long 100x</span></div><div class="pnl-roi">+326.07%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>2,040.00</span></div><div class="pnl-detail-item"><label>Exit</label><span>2,106.52</span></div></div><div class="pnl-member">— Ardiii · Apr 2025</div></div>
+      <div class="pnl-card"><div class="pnl-pair">ENA/USDT <span class="pnl-leverage">4H Setup</span></div><div class="pnl-roi">+13.54%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.0813</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.0966</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
+      <div class="pnl-card"><div class="pnl-pair">WLD/USDT <span class="pnl-leverage">2H Setup</span></div><div class="pnl-roi">+13.90%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.2414</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.2730</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
+      <div class="pnl-card"><div class="pnl-pair">BARD/USDT <span class="pnl-leverage">1H Setup</span></div><div class="pnl-roi">+12.12%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.3046</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.3371</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
+      <div class="pnl-card"><div class="pnl-pair">DOT/USDT <span class="pnl-leverage">2H Setup</span></div><div class="pnl-roi">+8.07%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>1.231</span></div><div class="pnl-detail-item"><label>Exit</label><span>1.327</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
+      <div class="pnl-card"><div class="pnl-pair">NOM/USDT <span class="pnl-leverage">1D Breakout</span></div><div class="pnl-roi">+245%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.003457</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.01252</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
     </div>
     <div class="proof-disclaimer">⚠️ <strong>Catatan:</strong> Hasil menggunakan leverage tinggi. ROI adalah ROI posisi leverage, bukan return modal keseluruhan. Hasil aktual tiap trader berbeda tergantung posisi dan manajemen risiko masing-masing.</div>
   </div>
@@ -194,6 +215,74 @@
     <div class="strategy-item"><span class="strategy-num">04</span><div class="strategy-text"><strong>Reason-Based Entry & Exit</strong><p>Setiap keputusan ada alasannya. Tidak ada "feeling" — hanya struktur, data, dan probabilitas.</p></div></div>
     <div class="strategy-item"><span class="strategy-num">05</span><div class="strategy-text"><strong>Advanced Risk & Capital Management</strong><p>Position sizing tepat. Drawdown control. Modal yang terjaga adalah senjata utama trader.</p></div></div>
     <div class="strategy-item"><span class="strategy-num">06</span><div class="strategy-text"><strong>Market Sector Rotation Analysis</strong><p>Identifikasi sektor yang mendapat inflow institusional — masuk lebih awal, exit lebih bersih.</p></div></div>
+  </div>
+</section>
+<div class="divider"></div>
+<section class="signals">
+  <div class="signals-inner">
+    <div class="signals-header">
+      <div class="section-label">// RECENT SIGNALS — APRIL 2026</div>
+      <h2 class="section-title">Sinyal Terbaru.<br>Hasil Terverifikasi.</h2>
+    </div>
+    <div class="signals-grid">
+      <div class="signal-card">
+        <div class="signal-pair">ENA/USDT</div>
+        <div class="signal-tf">4H · DESCENDING WEDGE BREAKOUT</div>
+        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.0813</span></div>
+        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.0895</span></div>
+        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.0966</span></div>
+        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.0754</span></div>
+        <div class="signal-roi">+13.54%</div>
+        <div class="signal-date">Apr 7–8, 2026</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-pair">WLD/USDT</div>
+        <div class="signal-tf">2H · DEMAND ZONE REACTION</div>
+        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.2414</span></div>
+        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.2605</span></div>
+        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.2730</span></div>
+        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.2346</span></div>
+        <div class="signal-roi">+13.90%</div>
+        <div class="signal-date">Apr 7–8, 2026</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-pair">BARD/USDT</div>
+        <div class="signal-tf">1H · ORDER BLOCK ENTRY</div>
+        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.3046</span></div>
+        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.3230</span></div>
+        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.3371</span></div>
+        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.2907</span></div>
+        <div class="signal-roi">+12.12%</div>
+        <div class="signal-date">Apr 7–8, 2026</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-pair">DOT/USDT</div>
+        <div class="signal-tf">2H · DEMAND ZONE + BOS</div>
+        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">1.231</span></div>
+        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">1.277</span></div>
+        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">1.327</span></div>
+        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">1.200</span></div>
+        <div class="signal-roi">+8.07%</div>
+        <div class="signal-date">Apr 7–8, 2026</div>
+      </div>
+      <div class="signal-card">
+        <div class="signal-pair">NOM/USDT</div>
+        <div class="signal-tf">1D · DESCENDING WEDGE BREAKOUT</div>
+        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.003457</span></div>
+        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.008046</span></div>
+        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.01252</span></div>
+        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.002800</span></div>
+        <div class="signal-roi">+262%</div>
+        <div class="signal-date">Apr 2, 2026</div>
+      </div>
+      <div class="signal-card" style="background:#0a1a0a">
+        <div class="signal-pair" style="color:var(--gold)">NEXT SIGNAL</div>
+        <div class="signal-tf">PREMIUM ONLY</div>
+        <div style="margin-top:20px;font-size:.78rem;color:var(--muted);line-height:1.7">Setup berikutnya hanya tersedia untuk member premium. Entry, TP, dan SL lengkap.</div>
+        <a href="https://t.me/soloadmin369" target="_blank" style="display:block;margin-top:20px;text-align:center;padding:10px;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none">Join Premium →</a>
+      </div>
+    </div>
+    <div class="signals-note">📊 <strong>Metodologi:</strong> Semua sinyal berbasis SMC/ICT framework — identifikasi Order Block, Demand Zone, dan konfirmasi BOS/CHoCH pada multi-timeframe. Entry dilakukan setelah konfirmasi struktur, bukan prediksi arah semata.</div>
   </div>
 </section>
 <div class="divider"></div>
