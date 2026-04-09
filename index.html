@@ -4,407 +4,864 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alpha Crypto 369 — Premium Trading Group</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Trade seperti institusi, bukan spekulan. Framework berbasis struktur market, on-chain data, dan risk management profesional.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--gold:#C9A84C;--gold-light:#F0D080;--gold-dim:#8B6914;--black:#080808;--dark:#0F0F0F;--card:#141414;--border:#222;--text:#E8E8E8;--muted:#666;--green:#00C896;--red:#FF4444}
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
-  .grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
-  section{position:relative;z-index:1}
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.15)}
-  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.05em}
-  .logo span{color:var(--gold)}
-  .nav-tag{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--gold);border:1px solid var(--gold-dim);padding:4px 10px;letter-spacing:.15em}
-  .ticker-wrap{margin-top:57px;background:rgba(201,168,76,0.06);border-bottom:1px solid rgba(201,168,76,0.1);overflow:hidden;padding:9px 0;position:relative;z-index:1}
-  .ticker{display:flex;gap:50px;animation:scroll 25s linear infinite;white-space:nowrap}
-  .ticker-item{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--gold);display:flex;align-items:center;gap:8px;flex-shrink:0}
-  .up{color:var(--green)}
-  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 24px 60px;position:relative}
-  .hero-glow{position:absolute;top:30%;left:50%;transform:translateX(-50%);width:500px;height:350px;background:radial-gradient(ellipse,rgba(201,168,76,0.1) 0%,transparent 70%);pointer-events:none}
-  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);padding:6px 16px;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;color:var(--gold);margin-bottom:28px;animation:fadeDown .8s ease both}
-  .hero-badge::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-  .hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,6vw,4.8rem);line-height:1;letter-spacing:-.02em;margin-bottom:20px;animation:fadeDown .8s .1s ease both}
-  .accent{color:var(--gold)}
-  .dim{opacity:.3}
-  .hero-sub{font-size:.95rem;color:var(--muted);max-width:460px;line-height:1.7;margin-bottom:40px;animation:fadeDown .8s .2s ease both}
-  .hero-stats{display:flex;gap:32px;margin-bottom:40px;animation:fadeDown .8s .3s ease both}
-  .stat{text-align:center}
-  .stat-num{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--gold);display:block}
-  .stat-label{font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
-  .hero-cta{display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeDown .8s .4s ease both}
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
-  .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.05em;padding:15px 36px;text-decoration:none;transition:all .2s}
-  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.35)}
-  .hero-note{font-size:.68rem;color:var(--muted);font-family:'Space Mono',monospace}
-  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);margin:0 24px}
-  .section-label{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
-  .section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,3.5vw,2.5rem);line-height:1.1}
-  .features{padding:80px 24px;max-width:1100px;margin:0 auto}
-  .features-header{margin-bottom:48px}
-  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;background:var(--border)}
-  .feature-card{background:var(--card);padding:32px 28px;transition:background .2s;position:relative;overflow:hidden}
-  .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
-  .feature-card:hover{background:#1a1a1a}
-  .feature-card:hover::before{opacity:1}
-  .feature-icon{font-size:1.6rem;margin-bottom:14px;display:block}
-  .feature-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:8px}
-  .feature-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
-  .feature-tag{display:inline-block;margin-top:10px;font-family:'Space Mono',monospace;font-size:.58rem;color:var(--green);border:1px solid rgba(0,200,150,.3);padding:3px 8px;letter-spacing:.1em}
-  .proof{padding:80px 24px;background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .proof-inner{max-width:1100px;margin:0 auto}
-  .proof-header{margin-bottom:48px}
-  .proof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:24px}
-  .pnl-card{background:var(--card);border:1px solid var(--border);padding:24px 20px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
-  .pnl-card:hover{transform:translateY(-4px);border-color:var(--gold-dim)}
-  .pnl-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent)}
-  .pnl-pair{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-  .pnl-leverage{background:rgba(201,168,76,.1);color:var(--gold);padding:2px 6px;font-size:.58rem;border:1px solid rgba(201,168,76,.2)}
-  .pnl-roi{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--green);line-height:1;margin-bottom:14px}
-  .pnl-detail{display:flex;gap:20px}
-  .pnl-detail-item label{display:block;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
-  .pnl-detail-item span{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--text)}
-  .pnl-member{margin-top:14px;font-size:.65rem;color:var(--muted);font-family:'Space Mono',monospace}
-  .proof-disclaimer{background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.15);border-left:3px solid var(--red);padding:14px 18px;font-size:.73rem;color:#999;line-height:1.6}
-  .strategy{padding:80px 24px;max-width:1100px;margin:0 auto}
-  .strategy-list{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border)}
-  .strategy-item{background:var(--card);padding:24px 28px;display:flex;align-items:flex-start;gap:16px}
-  .strategy-num{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--gold-dim);min-width:22px;padding-top:2px}
-  .strategy-text strong{display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:4px}
-  .strategy-text p{font-size:.76rem;color:var(--muted);line-height:1.5}
-  .pricing{padding:80px 24px;background:var(--dark);border-top:1px solid var(--border)}
-  .pricing-inner{max-width:900px;margin:0 auto}
-  .pricing-note{text-align:center;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--gold);margin-bottom:48px;margin-top:10px}
-  .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2px;background:var(--border)}
-  .price-card{background:var(--card);padding:36px 28px;display:flex;flex-direction:column;position:relative;transition:background .2s}
-  .price-card:hover{background:#1a1a1a}
-  .price-card.featured{background:#131a0f;outline:2px solid var(--gold);outline-offset:-2px;z-index:1}
-  .price-badge{position:absolute;top:-1px;right:20px;background:var(--gold);color:var(--black);font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;padding:4px 10px;letter-spacing:.1em}
-  .price-tier{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px}
-  .price-original{font-size:.75rem;color:var(--muted);text-decoration:line-through;font-family:'Space Mono',monospace;margin-bottom:4px}
-  .price-main{font-family:'Syne',sans-serif;font-weight:800;font-size:1.9rem;color:var(--text);margin-bottom:4px}
-  .currency{font-size:.9rem;vertical-align:super;color:var(--muted);font-weight:400}
-  .price-period{font-size:.7rem;color:var(--muted);margin-bottom:24px}
-  .price-features{list-style:none;margin-bottom:28px;flex:1}
-  .price-features li{font-size:.76rem;color:#aaa;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:8px}
-  .price-features li::before{content:'✓';color:var(--green);font-size:.68rem;min-width:14px}
-  .price-features li.extra{color:var(--gold)}
-  .btn-join{display:block;text-align:center;padding:13px;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.05em;text-decoration:none;transition:all .2s}
-  .btn-join-outline{border:1px solid var(--gold-dim);color:var(--gold)}
-  .btn-join-outline:hover{background:rgba(201,168,76,.1)}
-  .btn-join-filled{background:var(--gold);color:var(--black)}
-  .btn-join-filled:hover{background:var(--gold-light);transform:translateY(-2px)}
-  .payment{padding:72px 24px;max-width:900px;margin:0 auto}
-  .payment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:36px}
-  .payment-item{background:var(--card);border:1px solid var(--border);padding:18px}
-  .payment-bank{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--gold);margin-bottom:4px}
-  .payment-number{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--text);letter-spacing:.04em;margin-bottom:3px}
-  .payment-name{font-size:.68rem;color:var(--muted)}
-  .payment-warning{margin-top:20px;background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.2);border-left:3px solid var(--red);padding:14px 18px;font-size:.73rem;color:#bbb;line-height:1.7}
-  .risk-section{padding:60px 24px;background:var(--dark);border-top:1px solid var(--border);text-align:center}
-  .risk-box{max-width:640px;margin:0 auto;background:rgba(255,68,68,.04);border:1px solid rgba(255,68,68,.2);padding:28px 32px}
-  .risk-title{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.2em;color:var(--red);margin-bottom:14px}
-  .risk-text{font-size:.78rem;color:#888;line-height:1.8}
-  .final-cta{padding:100px 24px;text-align:center;position:relative;overflow:hidden}
-  .final-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(201,168,76,.07) 0%,transparent 70%);pointer-events:none}
-  .final-cta h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,4.5vw,3rem);margin-bottom:14px;position:relative}
-  .final-cta p{color:var(--muted);font-size:.88rem;margin-bottom:36px;position:relative}
-  footer{padding:28px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:var(--muted);font-family:'Space Mono',monospace}
-  @media(max-width:640px){.hero-stats{gap:20px}footer{flex-direction:column;gap:6px;text-align:center}}
-  .urgency-bar{position:relative;z-index:2;background:#0a0a0a;border-bottom:1px solid rgba(255,68,68,.3);padding:10px 24px;text-align:center}
-  .urgency-inner{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-  .urgency-dot{width:8px;height:8px;background:var(--red);border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
-  .urgency-text{font-family:'Space Mono',monospace;font-size:.68rem;color:#fff;letter-spacing:.05em}
-  .urgency-text strong{color:var(--red)}
-  .slot-bar-wrap{width:200px;height:6px;background:#222;border-radius:3px;overflow:hidden;flex-shrink:0}
-  .slot-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--red));width:10%;transition:width .5s}
-  .slot-section{padding:60px 24px;background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .slot-inner{max-width:700px;margin:0 auto;text-align:center}
-  .slot-counter{display:flex;align-items:center;justify-content:center;gap:24px;margin:32px 0;flex-wrap:wrap}
-  .slot-num-box{text-align:center}
-  .slot-num{font-family:'Syne',sans-serif;font-weight:800;font-size:3.5rem;line-height:1;display:block}
-  .slot-num.red{color:var(--red)}
-  .slot-num.green{color:var(--green)}
-  .slot-num-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-top:4px}
-  .slot-divider{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--border);padding-top:8px}
-  .slot-progress-wrap{width:100%;max-width:500px;margin:0 auto 24px;height:10px;background:#1a1a1a;border-radius:5px;overflow:hidden}
-  .slot-progress-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--green) 0%,#ffaa00 60%,var(--red) 100%);transition:width 1s ease}
-  .slot-label{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);margin-bottom:32px}
-  .slot-label strong{color:var(--red)}
-  .signals{padding:80px 24px;background:var(--dark);border-top:1px solid var(--border)}
-  .signals-inner{max-width:1100px;margin:0 auto}
-  .signals-header{margin-bottom:48px}
-  .signals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:var(--border);margin-bottom:24px}
-  .signal-card{background:var(--card);padding:20px;position:relative;transition:background .2s}
-  .signal-card:hover{background:#1a1a1a}
-  .signal-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--green)}
-  .signal-pair{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:4px}
-  .signal-tf{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-bottom:12px;letter-spacing:.1em}
-  .signal-row{display:flex;justify-content:space-between;margin-bottom:4px}
-  .signal-label{font-size:.62rem;color:var(--muted);font-family:'Space Mono',monospace}
-  .signal-val{font-size:.72rem;color:var(--text);font-family:'Space Mono',monospace}
-  .signal-roi{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--green);margin-top:10px}
-  .signal-date{font-size:.6rem;color:var(--muted);font-family:'Space Mono',monospace;margin-top:6px}
-  .signals-note{background:rgba(0,200,150,.04);border:1px solid rgba(0,200,150,.15);border-left:3px solid var(--green);padding:14px 18px;font-size:.73rem;color:#999;line-height:1.6}
+:root{
+  --gold:#F5C842;--gold2:#FFE066;--gold-dim:#c9a020;
+  --dark:#060606;--dark2:#0c0c0c;--dark3:#141414;--dark4:#1c1c1c;--dark5:#242424;
+  --white:#F2EFE9;--white-dim:#6A6660;--white-mid:#A8A49E;
+  --green:#00E5A0;--green2:#00ff99;--blue:#4A9EFF;--red:#FF4D4D;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;background:var(--dark);}
+body{background:var(--dark);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,6,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:padding .3s;}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--gold);text-decoration:none;letter-spacing:.02em;}
+.nav-logo span{color:var(--white);}
+.nav-mid{display:flex;gap:24px;}
+.nav-link{font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:none;border:none;transition:color .2s;padding:4px 0;}
+.nav-link:hover{color:var(--white);}
+.nav-cta{background:var(--gold);color:var(--dark);padding:9px 20px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px);}
+@media(max-width:640px){.nav-mid{display:none;}nav{padding:14px 16px;}}
+
+/* ── LIVE TICKER ── */
+.ticker-bar{background:var(--dark2);border-bottom:1px solid rgba(255,255,255,.05);padding:10px 0;overflow:hidden;margin-top:57px;}
+.ticker-track{display:flex;gap:48px;animation:tkr 30s linear infinite;width:max-content;}
+.tick-item{display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px;color:var(--white-dim);white-space:nowrap;}
+.tick-pair{color:var(--white);font-weight:700;}
+.tick-live{color:var(--green);animation:blink 1.5s ease infinite;}
+.tick-roi{color:var(--gold);}
+.tick-active{color:var(--green);}
+.tick-sep{color:rgba(255,255,255,.15);}
+@keyframes tkr{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;};}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 35%,rgba(245,200,66,.07) 0%,transparent 65%),radial-gradient(ellipse 40% 30% at 20% 80%,rgba(0,229,160,.03) 0%,transparent 50%);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(245,200,66,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(245,200,66,.03) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 90% 70% at 50% 40%,black 20%,transparent 75%);}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;animation:orbf 9s ease-in-out infinite;}
+.orb1{width:600px;height:600px;background:rgba(245,200,66,.05);top:-150px;left:-200px;}
+.orb2{width:500px;height:500px;background:rgba(0,229,160,.03);bottom:-100px;right:-150px;animation-delay:-5s;}
+@keyframes orbf{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-32px) scale(1.04);}}
+.hero-content{position:relative;z-index:1;max-width:860px;}
+
+/* SLOT BADGE */
+.slot-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,77,77,.1);border:1px solid rgba(255,77,77,.3);border-radius:100px;padding:8px 20px;margin-bottom:28px;font-family:'Space Mono',monospace;font-size:11px;color:#ff8080;letter-spacing:.06em;}
+.slot-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:sdot 1s ease infinite;}
+@keyframes sdot{0%,100%{box-shadow:0 0 0 0 rgba(255,77,77,.5);}50%{box-shadow:0 0 0 7px rgba(255,77,77,0);}}
+
+/* HERO H1 */
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(44px,8.5vw,100px);line-height:.88;letter-spacing:-.04em;margin-bottom:28px;}
+h1 .l1{display:block;color:rgba(242,239,233,.25);}
+h1 .l2{display:block;background:linear-gradient(120deg,var(--gold) 0%,#fff3a0 45%,var(--gold) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 3.5s linear infinite;}
+@keyframes shine{to{background-position:200% center;}}
+h1 .l3{display:block;color:var(--white);}
+
+.hero-sub{font-size:17px;color:var(--white-mid);line-height:1.8;max-width:620px;margin:0 auto 44px;}
+.hero-sub strong{color:var(--white);font-weight:500;}
+
+/* COUNTDOWN */
+.cd-wrap{display:flex;gap:8px;justify-content:center;margin-bottom:36px;}
+.cd-box{background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.18);border-radius:12px;padding:12px 18px;min-width:70px;text-align:center;}
+.cd-num{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--gold);line-height:1;display:block;}
+.cd-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--white-dim);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;display:block;}
+.cd-sep{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:rgba(245,200,66,.3);align-self:center;padding-bottom:6px;}
+
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+.btn-main{background:var(--gold);color:var(--dark);padding:18px 38px;border-radius:14px;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none;position:relative;overflow:hidden;}
+.btn-main::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .5s;}
+.btn-main:hover::after{transform:translateX(100%);}
+.btn-main:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 18px 45px rgba(245,200,66,.38);}
+.btn-ghost{background:transparent;color:var(--white);padding:18px 32px;border-radius:14px;font-family:'Syne',sans-serif;font-weight:600;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,.14);transition:all .25s;cursor:pointer;}
+.btn-ghost:hover{border-color:rgba(255,255,255,.38);transform:translateY(-3px);}
+.btn-admin{display:block;font-size:13px;color:var(--white-dim);margin-top:-32px;margin-bottom:36px;}
+.btn-admin span{color:var(--gold);}
+
+/* HERO STATS */
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);border-radius:20px;overflow:hidden;max-width:680px;margin:0 auto;}
+@media(max-width:560px){.hero-stats{grid-template-columns:repeat(2,1fr);}}
+.hstat{background:var(--dark2);padding:20px 16px;text-align:center;}
+.hstat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--gold);line-height:1;margin-bottom:4px;}
+.hstat-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--white-dim);letter-spacing:.08em;text-transform:uppercase;}
+
+/* ── SECTIONS ── */
+.section{padding:88px 24px;max-width:1080px;margin:0 auto;}
+.section-sm{padding:88px 24px;max-width:860px;margin:0 auto;}
+.section-center{text-align:center;}
+.section-center .sp{margin:0 auto;}
+.eyebrow{font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:14px;}
+.sh2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,3.8vw,44px);line-height:1.05;margin-bottom:14px;}
+.sp{font-size:15px;color:var(--white-dim);line-height:1.75;max-width:540px;}
+.divider{max-width:1000px;margin:0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);}
+
+/* ── WHAT YOU GET ── */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.04);border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.06);margin-top:52px;}
+@media(max-width:768px){.benefits-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.benefits-grid{grid-template-columns:1fr;}}
+.benefit-item{background:var(--dark2);padding:34px 26px;transition:background .25s;position:relative;}
+.benefit-item:hover{background:var(--dark3);}
+.benefit-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(245,200,66,0),transparent);transition:all .3s;}
+.benefit-item:hover::after{background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),transparent);}
+.bi-icon{font-size:32px;margin-bottom:16px;display:block;}
+.bi-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px;}
+.bi-desc{font-size:13px;color:var(--white-dim);line-height:1.7;}
+.bi-tag{display:inline-block;margin-top:12px;padding:3px 10px;border-radius:6px;font-family:'Space Mono',monospace;font-size:10px;background:rgba(245,200,66,.08);color:var(--gold);letter-spacing:.04em;}
+
+/* ── TRACK RECORD ── */
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px;}
+@media(max-width:860px){.results-grid{grid-template-columns:repeat(2,1fr);}}
+.result-card{background:var(--dark3);border:1px solid rgba(0,229,160,.1);border-radius:16px;padding:20px;transition:all .3s;}
+.result-card:hover{border-color:rgba(0,229,160,.3);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,229,160,.08);}
+.result-card.big{border-color:rgba(0,229,160,.25);background:linear-gradient(145deg,#071a10 0%,#0e0e0e 60%);}
+.rc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.rc-pair{font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);letter-spacing:.06em;}
+.rc-tag{font-family:'Space Mono',monospace;font-size:9px;background:rgba(0,229,160,.1);color:var(--green);padding:2px 8px;border-radius:4px;border:1px solid rgba(0,229,160,.15);}
+.rc-pct{font-family:'Syne',sans-serif;font-weight:800;font-size:30px;color:var(--green);line-height:1;margin:8px 0;}
+.rc-detail{display:flex;gap:16px;margin-top:10px;}
+.rc-det label{font-size:10px;color:var(--white-dim);display:block;margin-bottom:2px;font-family:'Space Mono',monospace;}
+.rc-det span{font-family:'Space Mono',monospace;font-size:12px;color:var(--white-mid);}
+.rc-meta{font-size:10px;color:var(--white-dim);margin-top:10px;font-family:'Space Mono',monospace;border-top:1px solid rgba(255,255,255,.05);padding-top:8px;}
+.result-note{margin-top:20px;padding:16px 22px;background:rgba(255,200,0,.04);border-left:3px solid rgba(255,200,0,.25);border-radius:8px;font-size:13px;color:var(--white-dim);line-height:1.7;}
+
+/* ── RECENT SIGNALS ── */
+.signals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+@media(max-width:768px){.signals-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.signals-grid{grid-template-columns:1fr;}}
+.signal-card{background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:24px;transition:all .3s;position:relative;overflow:hidden;}
+.signal-card:hover{border-color:rgba(245,200,66,.2);transform:translateY(-3px);}
+.signal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent);}
+.sig-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.sig-pair{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;}
+.sig-pct{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--green);}
+.sig-type{font-family:'Space Mono',monospace;font-size:9px;color:var(--white-dim);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:3px 8px;border-radius:5px;margin-bottom:16px;display:inline-block;letter-spacing:.06em;}
+.sig-levels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.sig-lev{background:rgba(255,255,255,.03);border-radius:8px;padding:8px 10px;}
+.sig-lev-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--white-dim);letter-spacing:.06em;margin-bottom:3px;}
+.sig-lev-val{font-family:'Space Mono',monospace;font-size:12px;color:var(--white-mid);}
+.sig-lev.entry .sig-lev-val{color:var(--white);}
+.sig-lev.tp .sig-lev-val{color:var(--green);}
+.sig-lev.sl .sig-lev-val{color:var(--red);opacity:.7;}
+.sig-date{font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);}
+.signal-locked{background:var(--dark3);border:1px solid rgba(245,200,66,.15);border-radius:18px;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:200px;position:relative;overflow:hidden;}
+.signal-locked::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+.lock-icon{font-size:32px;margin-bottom:12px;}
+.lock-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.lock-desc{font-size:13px;color:var(--white-dim);line-height:1.65;margin-bottom:16px;}
+.lock-btn{background:var(--gold);color:var(--dark);padding:10px 20px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;text-decoration:none;transition:all .2s;}
+.lock-btn:hover{background:var(--gold2);}
+.sig-note{margin-top:20px;padding:16px 20px;background:rgba(74,158,255,.04);border-left:3px solid rgba(74,158,255,.25);border-radius:8px;font-size:13px;color:var(--white-dim);line-height:1.7;}
+
+/* ── STRATEGY ── */
+.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04);border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.06);margin-top:48px;}
+@media(max-width:720px){.strategy-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.strategy-grid{grid-template-columns:1fr;}}
+.strat-item{background:var(--dark2);padding:32px 24px;transition:background .25s;}
+.strat-item:hover{background:var(--dark3);}
+.strat-num{font-family:'Space Mono',monospace;font-size:10px;color:var(--gold);margin-bottom:12px;opacity:.65;}
+.strat-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:8px;}
+.strat-desc{font-size:13px;color:var(--white-dim);line-height:1.65;}
+
+/* ── SLOT COUNTER ── */
+.slot-section{padding:80px 24px;max-width:700px;margin:0 auto;text-align:center;}
+.slot-bar-wrap{margin:36px 0;background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:32px;}
+.slot-nums{display:flex;justify-content:center;align-items:baseline;gap:12px;margin-bottom:16px;}
+.slot-taken{font-family:'Syne',sans-serif;font-weight:800;font-size:52px;color:var(--white);}
+.slot-slash{font-size:28px;color:var(--white-dim);}
+.slot-total{font-family:'Syne',sans-serif;font-weight:800;font-size:36px;color:var(--white-dim);}
+.slot-bar{height:12px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden;margin-bottom:14px;}
+.slot-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:100px;width:90%;transition:width 1.5s ease;}
+.slot-labels{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);}
+.slot-remaining{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--red);margin-top:16px;}
+.slot-sub{font-size:13px;color:var(--white-dim);margin-top:6px;}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:1fr 1.08fr 1fr;gap:16px;align-items:start;margin-top:52px;}
+@media(max-width:720px){.pricing-grid{grid-template-columns:1fr;}}
+.pricing-card{background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:34px 28px;transition:transform .3s;position:relative;}
+.pricing-card:hover{transform:translateY(-5px);}
+.pricing-card.hc{background:linear-gradient(155deg,#1c1600 0%,#0e0e0e 55%);border:1px solid rgba(245,200,66,.35);box-shadow:0 0 80px rgba(245,200,66,.08),inset 0 1px 0 rgba(245,200,66,.12);transform:scale(1.03);}
+.pricing-card.hc:hover{transform:scale(1.03) translateY(-5px);}
+.pop-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark);font-family:'Syne',sans-serif;font-weight:800;font-size:11px;padding:5px 16px;border-radius:100px;white-space:nowrap;letter-spacing:.04em;}
+.pc-tier{font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.pc-name{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;margin-bottom:20px;}
+.hc .pc-name{color:var(--gold);}
+.pc-orig{font-size:13px;color:var(--white-dim);text-decoration:line-through;margin-bottom:4px;}
+.pc-price{font-family:'Syne',sans-serif;font-weight:800;font-size:36px;line-height:1;color:var(--white);}
+.hc .pc-price{color:var(--gold);}
+.pc-sub{font-size:12px;color:var(--white-dim);margin-top:6px;margin-bottom:24px;line-height:1.5;}
+.pc-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.pc-feats li{font-size:13px;display:flex;align-items:flex-start;gap:10px;line-height:1.5;color:var(--white-mid);}
+.hc .pc-feats li{color:var(--white);opacity:.9;}
+.fc{color:var(--gold);flex-shrink:0;margin-top:1px;font-size:13px;}
+.pc-btn{display:block;text-align:center;padding:15px 20px;border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;transition:all .25s;cursor:pointer;border:none;width:100%;text-decoration:none;}
+.pc-btn-g{border:1px solid rgba(255,255,255,.12);color:var(--white);background:transparent;}
+.pc-btn-g:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px);}
+.pc-btn-gold{background:var(--gold);color:var(--dark);}
+.pc-btn-gold:hover{background:var(--gold2);box-shadow:0 10px 30px rgba(245,200,66,.38);transform:translateY(-2px);}
+.pricing-note{text-align:center;margin-top:24px;font-size:13px;color:var(--white-dim);display:flex;align-items:center;justify-content:center;gap:8px;}
+
+/* ── PAYMENT ── */
+.pay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px;}
+@media(max-width:700px){.pay-grid{grid-template-columns:repeat(2,1fr);}}
+.pay-card{background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px 18px;transition:all .25s;cursor:pointer;position:relative;}
+.pay-card:hover{border-color:rgba(245,200,66,.25);transform:translateY(-3px);}
+.pay-copy-hint{position:absolute;top:10px;right:12px;font-size:10px;color:var(--white-dim);font-family:'Space Mono',monospace;opacity:0;transition:opacity .2s;}
+.pay-card:hover .pay-copy-hint{opacity:1;}
+.pay-method{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--gold);margin-bottom:8px;}
+.pay-number{font-family:'Space Mono',monospace;font-size:14px;color:var(--white);margin-bottom:4px;letter-spacing:.04em;}
+.pay-name{font-size:12px;color:var(--white-dim);}
+.pay-warn{margin-top:20px;padding:18px 22px;background:rgba(255,77,77,.05);border-left:3px solid rgba(255,77,77,.35);border-radius:10px;font-size:13px;color:var(--white-mid);line-height:1.7;}
+.pay-warn strong{color:var(--white);}
+
+/* ── STEPS ── */
+.steps-list{display:flex;flex-direction:column;margin-top:48px;}
+.step-item{display:flex;gap:24px;padding-bottom:40px;position:relative;}
+.step-item:last-child{padding-bottom:0;}
+.step-item:not(:last-child)::before{content:'';position:absolute;left:20px;top:46px;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(245,200,66,.3),rgba(245,200,66,.0));}
+.step-num{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.28);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--gold);}
+.step-content{padding-top:9px;}
+.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:7px;}
+.step-desc{font-size:14px;color:var(--white-dim);line-height:1.72;}
+.step-desc strong{color:var(--white);}
+
+/* ── TESTIMONIALS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px;}
+@media(max-width:720px){.testi-grid{grid-template-columns:1fr;}}
+.testi-card{background:var(--dark3);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:28px;transition:all .3s;}
+.testi-card:hover{border-color:rgba(245,200,66,.15);transform:translateY(-3px);}
+.testi-stars{color:var(--gold);font-size:14px;letter-spacing:3px;margin-bottom:14px;}
+.testi-quote{font-size:14px;line-height:1.78;color:rgba(242,239,233,.8);margin-bottom:18px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--dark4);display:flex;align-items:center;justify-content:center;font-size:17px;border:1px solid rgba(255,255,255,.06);}
+.testi-name{font-size:14px;font-weight:500;}
+.testi-role{font-size:11px;color:var(--white-dim);font-family:'Space Mono',monospace;margin-top:2px;}
+
+/* ── BIG QUOTE ── */
+.bigquote{padding:80px 24px;text-align:center;position:relative;overflow:hidden;}
+.bq-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 100% at 50% 50%,rgba(245,200,66,.04) 0%,transparent 70%);}
+.bq-content{position:relative;z-index:1;max-width:680px;margin:0 auto;}
+.bq-mark{font-family:'Syne',sans-serif;font-weight:800;font-size:120px;line-height:.4;color:rgba(245,200,66,.08);margin-bottom:0;}
+.bq-text{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(22px,3.5vw,38px);line-height:1.3;color:var(--white);margin-bottom:22px;}
+.bq-text em{font-style:normal;color:var(--gold);}
+.bq-author{font-family:'Space Mono',monospace;font-size:11px;color:var(--white-dim);letter-spacing:.12em;}
+
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column;gap:8px;margin-top:48px;}
+.faq-item{background:var(--dark3);border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;transition:border-color .2s;}
+.faq-item.open{border-color:rgba(245,200,66,.2);}
+.faq-q{padding:20px 24px;font-family:'Syne',sans-serif;font-weight:600;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;user-select:none;}
+.faq-q:hover{background:rgba(255,255,255,.02);}
+.faq-icon{width:26px;height:26px;border-radius:50%;background:rgba(245,200,66,.07);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:17px;transition:transform .3s,background .2s;flex-shrink:0;line-height:1;}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:rgba(245,200,66,.14);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;font-size:14px;color:var(--white-dim);line-height:1.78;padding:0 24px;}
+.faq-item.open .faq-a{max-height:320px;padding:0 24px 20px;}
+
+/* ── FINAL CTA ── */
+.final-cta{padding:100px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+.fcta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,rgba(245,200,66,.07) 0%,transparent 60%);}
+.fcta-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(245,200,66,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(245,200,66,.025) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);}
+.fcta-content{position:relative;z-index:1;max-width:660px;margin:0 auto;}
+.fcta-tag{display:inline-block;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.22);border-radius:100px;padding:7px 20px;font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px;}
+.fcta-h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,7vw,74px);line-height:.93;letter-spacing:-.035em;margin-bottom:20px;}
+.fcta-h2 span{color:var(--gold);}
+.fcta-p{font-size:16px;color:var(--white-mid);line-height:1.78;margin-bottom:44px;max-width:520px;margin-left:auto;margin-right:auto;}
+.fcta-note{font-size:12px;color:var(--white-dim);display:flex;align-items:center;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap;}
+
+/* ── RISK ── */
+.risk-section{padding:0 24px 80px;max-width:960px;margin:0 auto;}
+.risk-box{
+  background:var(--dark3);
+  border:1px solid rgba(255,120,0,.18);
+  border-radius:20px;
+  padding:28px 32px;
+  font-size:13px;color:var(--white-dim);
+  line-height:1.78;text-align:center;
+  position:relative;overflow:hidden;
+}
+.risk-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,120,0,.4),transparent);
+}
+.risk-box .risk-icon{font-size:24px;display:block;margin-bottom:10px;}
+.risk-box strong{color:var(--white);}
+
+/* FOOTER */
+footer{
+  background:var(--dark2);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:52px 24px 40px;
+}
+.footer-inner{max-width:960px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px;}
+.footer-logo-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.footer-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--gold);}
+.footer-tagline{font-family:'Space Mono',monospace;font-size:10px;color:var(--white-dim);letter-spacing:.15em;text-transform:uppercase;}
+.footer-divider{width:60px;height:1px;background:rgba(255,255,255,.08);}
+.footer-links{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;}
+.footer-links a{
+  font-size:12px;color:var(--white-dim);text-decoration:none;
+  font-family:'Space Mono',monospace;transition:color .2s;
+  letter-spacing:.05em;text-transform:uppercase;
+}
+.footer-links a:hover{color:var(--white);}
+.footer-copy{font-size:11px;color:var(--white-dim);opacity:.3;text-align:center;font-family:'Space Mono',monospace;line-height:1.6;}
+
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.ca{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+.ca.visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
-<nav>
-  <div class="logo">ALPHA<span>CRYPTO</span> 369</div>
-  <div class="nav-tag">PREMIUM GROUP</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ALPHA<span>CRYPTO</span> 369</a>
+  <div class="nav-mid">
+    <button class="nav-link" onclick="goTo('benefits')">Benefit</button>
+    <button class="nav-link" onclick="goTo('signals')">Sinyal</button>
+    <button class="nav-link" onclick="goTo('pricing')">Harga</button>
+    <button class="nav-link" onclick="goTo('payment')">Cara Bayar</button>
+    <button class="nav-link" onclick="goTo('faq')">FAQ</button>
+  </div>
+  <a href="https://t.me/soloadmin369" target="_blank" class="nav-cta">Join Premium →</a>
 </nav>
-<div class="urgency-bar">
-  <div class="urgency-inner">
-    <div class="urgency-dot"></div>
-    <span class="urgency-text">⚠️ SLOT TERBATAS — Hanya tersisa <strong id="slot-remain">30</strong> dari 300 slot founding member</span>
-    <div class="slot-bar-wrap"><div class="slot-bar-fill" id="mini-bar"></div></div>
+
+<!-- LIVE TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="tick-item"><span class="tick-pair">BTC/USDT</span><span class="tick-live">▲ LIVE</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item"><span class="tick-pair">ETH/USDT</span><span class="tick-live">▲ LIVE</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item"><span class="tick-pair">SOL/USDT</span><span class="tick-live">▲ LIVE</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item"><span class="tick-pair">EDGE/USDT</span><span class="tick-roi">+934% ROI</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item">24H COVERAGE <span class="tick-active">● AKTIF</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item">270+ MEMBER AKTIF</span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item" style="color:rgba(255,255,255,.2);">NO HYPE · NO RUMOR · NO FOMO</span>
+    <span class="tick-sep">·</span>
+    <!-- duplicate for loop -->
+    <span class="tick-item"><span class="tick-pair">BTC/USDT</span><span class="tick-live">▲ LIVE</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item"><span class="tick-pair">ETH/USDT</span><span class="tick-live">▲ LIVE</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item"><span class="tick-pair">SOL/USDT</span><span class="tick-live">▲ LIVE</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item"><span class="tick-pair">EDGE/USDT</span><span class="tick-roi">+934% ROI</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item">24H COVERAGE <span class="tick-active">● AKTIF</span></span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item">270+ MEMBER AKTIF</span>
+    <span class="tick-sep">·</span>
+    <span class="tick-item" style="color:rgba(255,255,255,.2);">NO HYPE · NO RUMOR · NO FOMO</span>
+    <span class="tick-sep">·</span>
   </div>
 </div>
-<div class="ticker-wrap">
-  <div class="ticker">
-    <span class="ticker-item">BTC/USDT <span class="up">▲ LIVE</span></span>
-    <span class="ticker-item">ETH/USDT <span class="up">▲ LIVE</span></span>
-    <span class="ticker-item">SOL/USDT <span class="up">▲ LIVE</span></span>
-    <span class="ticker-item">EDGE/USDT <span class="up">+934% ROI</span></span>
-    <span class="ticker-item">24H COVERAGE <span class="up">● AKTIF</span></span>
-    <span class="ticker-item">270+ MEMBER AKTIF</span>
-    <span class="ticker-item">NO HYPE · NO RUMOR · NO FOMO</span>
-    <span class="ticker-item">BTC/USDT <span class="up">▲ LIVE</span></span>
-    <span class="ticker-item">ETH/USDT <span class="up">▲ LIVE</span></span>
-    <span class="ticker-item">SOL/USDT <span class="up">▲ LIVE</span></span>
-    <span class="ticker-item">EDGE/USDT <span class="up">+934% ROI</span></span>
-    <span class="ticker-item">24H COVERAGE <span class="up">● AKTIF</span></span>
-    <span class="ticker-item">270+ MEMBER AKTIF</span>
-    <span class="ticker-item">NO HYPE · NO RUMOR · NO FOMO</span>
-  </div>
-</div>
+
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-badge">INSTITUTIONAL TRADING FRAMEWORK · 24H MARKET COVERAGE</div>
-  <h1>Trade Seperti<br><span class="accent">Institusi.</span><br><span class="dim">Bukan Spekulan.</span></h1>
-  <p class="hero-sub">Bukan grup sinyal biasa. Framework berbasis struktur market, on-chain data, dan risk management profesional — untuk trader yang serius membangun kapital.</p>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">270+</span><span class="stat-label">Active Members</span></div>
-    <div class="stat"><span class="stat-num">24H</span><span class="stat-label">Market Coverage</span></div>
-    <div class="stat"><span class="stat-num">8</span><span class="stat-label">Signals Apr 2026</span></div>
-    <div class="stat"><span class="stat-num">+934%</span><span class="stat-label">Top ROI</span></div>
-  </div>
-  <div class="hero-cta">
-    <a href="https://t.me/soloadmin369" target="_blank" class="btn-primary">🚀 Join Premium Sekarang</a>
-    <span class="hero-note">PM @soloadmin369 · Konfirmasi dalam 24 jam</span>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-content">
+
+    <div class="slot-badge">
+      <div class="slot-dot"></div>
+      ⚠️ SLOT TERBATAS — Hanya tersisa 30 dari 300 slot founding member
+    </div>
+
+    <div class="hero-eyebrow">Institutional Trading Framework · 24H Market Coverage</div>
+
+    <h1>
+      <span class="l1">Trade Seperti</span>
+      <span class="l2">Institusi.</span>
+      <span class="l3">Bukan Spekulan.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Bukan grup sinyal biasa. <strong>Framework berbasis struktur market, on-chain data, dan risk management profesional</strong> — untuk trader yang serius membangun kapital.
+    </p>
+
+    <div class="cd-wrap">
+      <div class="cd-box"><span class="cd-num" id="cdh">23</span><span class="cd-lbl">Jam</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cdm">59</span><span class="cd-lbl">Menit</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cds">59</span><span class="cd-lbl">Detik</span></div>
+    </div>
+
+    <div class="hero-btns">
+      <button class="btn-main" onclick="goTo('pricing')">🚀 Join Premium Sekarang</button>
+      <button class="btn-ghost" onclick="goTo('benefits')">Lihat Semua Benefit</button>
+    </div>
+    <p class="btn-admin">PM <span>@soloadmin369</span> · Konfirmasi dalam 24 jam</p>
+
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">270+</div><div class="hstat-lbl">Active Members</div></div>
+      <div class="hstat"><div class="hstat-num">24H</div><div class="hstat-lbl">Market Coverage</div></div>
+      <div class="hstat"><div class="hstat-num">8+</div><div class="hstat-lbl">Signals Apr 2026</div></div>
+      <div class="hstat"><div class="hstat-num">+934%</div><div class="hstat-lbl">Top ROI</div></div>
+    </div>
+
   </div>
 </section>
+
 <div class="divider"></div>
-<section class="features">
-  <div class="features-header">
-    <div class="section-label">// WHAT YOU GET</div>
-    <h2 class="section-title">Apa Yang Kamu Dapat<br>di Premium Group</h2>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card"><span class="feature-icon">📊</span><div class="feature-title">Daily Scalping Call</div><p class="feature-desc">Entry, risk, dan exit yang jelas. Berbasis struktur price action dan konfirmasi multi-timeframe.</p><span class="feature-tag">FUTURES</span></div>
-    <div class="feature-card"><span class="feature-icon">📈</span><div class="feature-title">Swing Trade Mingguan & Bulanan</div><p class="feature-desc">Setup berbasis momentum sektor dan struktur market. Spot dan futures, timing entry terukur.</p><span class="feature-tag">FUTURES · SPOT</span></div>
-    <div class="feature-card"><span class="feature-icon">🛡️</span><div class="feature-title">Market Insight & Risk Management</div><p class="feature-desc">Bukan hanya entry — capital protection setiap hari. Trader yang survive lebih penting dari yang profit sekali.</p><span class="feature-tag">EVERYDAY</span></div>
-    <div class="feature-card"><span class="feature-icon">🔗</span><div class="feature-title">On-Chain Data Analysis</div><p class="feature-desc">Data institusional: MVRV, SOPR, funding rate, open interest — diinterpretasi untuk konteks pasar saat ini.</p><span class="feature-tag">ADVANCED</span></div>
-    <div class="feature-card"><span class="feature-icon">💬</span><div class="feature-title">Private Telegram Consultation</div><p class="feature-desc">Akses langsung ke mentor untuk diskusi setup, portofolio, atau pertanyaan teknikal.</p><span class="feature-tag">PRIVATE</span></div>
-    <div class="feature-card"><span class="feature-icon">📚</span><div class="feature-title">Professional Trading E-Book</div><p class="feature-desc">Materi komprehensif: SMC/ICT methodology, Supply & Demand, chart patterns, candlestick analysis.</p><span class="feature-tag">INCLUDED</span></div>
+
+<!-- WHAT YOU GET -->
+<section class="section reveal" id="benefits">
+  <span class="eyebrow">// What You Get</span>
+  <h2 class="sh2">Apa Yang Kamu Dapat<br>di Premium Group</h2>
+  <p class="sp">Setiap fitur dirancang untuk satu tujuan: menjadikanmu trader mandiri yang bisa analisis sendiri.</p>
+  <div class="benefits-grid">
+    <div class="benefit-item ca"><span class="bi-icon">📊</span><div class="bi-title">Daily Scalping Call</div><div class="bi-desc">Entry, risk, dan exit yang jelas. Berbasis struktur price action dan konfirmasi multi-timeframe. Tidak ada ambiguitas.</div><span class="bi-tag">FUTURES</span></div>
+    <div class="benefit-item ca"><span class="bi-icon">📈</span><div class="bi-title">Swing Trade Mingguan & Bulanan</div><div class="bi-desc">Setup berbasis momentum sektor dan struktur market. Spot dan futures, dengan timing entry yang terukur.</div><span class="bi-tag">FUTURES · SPOT</span></div>
+    <div class="benefit-item ca"><span class="bi-icon">🛡️</span><div class="bi-title">Market Insight & Risk Management</div><div class="bi-desc">Bukan hanya entry — capital protection setiap hari. Trader yang survive lebih penting dari yang profit sekali.</div><span class="bi-tag">EVERYDAY</span></div>
+    <div class="benefit-item ca"><span class="bi-icon">🔗</span><div class="bi-title">On-Chain Data Analysis</div><div class="bi-desc">Data institusional: MVRV, SOPR, funding rate, open interest — diinterpretasi untuk konteks pasar saat ini.</div><span class="bi-tag">ADVANCED</span></div>
+    <div class="benefit-item ca"><span class="bi-icon">💬</span><div class="bi-title">Private Telegram Consultation</div><div class="bi-desc">Akses langsung ke mentor untuk diskusi setup, portofolio, atau pertanyaan teknikal. Bukan bot — manusia nyata.</div><span class="bi-tag">PRIVATE</span></div>
+    <div class="benefit-item ca"><span class="bi-icon">📚</span><div class="bi-title">64 E-Book Technical Analysis</div><div class="bi-desc">Koleksi lengkap: SMC/ICT methodology, Supply & Demand, chart patterns, candlestick analysis. Eksklusif Lifetime.</div><span class="bi-tag">LIFETIME ONLY</span></div>
   </div>
 </section>
+
 <div class="divider"></div>
-<section class="proof">
-  <div class="proof-inner">
-    <div class="proof-header">
-      <div class="section-label">// MEMBER RESULTS</div>
-      <h2 class="section-title">Hasil Nyata.<br>Bukan Rekayasa.</h2>
-    </div>
-    <div class="proof-grid">
-      <div class="pnl-card"><div class="pnl-pair">EDGE/USDT <span class="pnl-leverage">Long 25x</span></div><div class="pnl-roi">+934.31%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.6965</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.9568</span></div></div><div class="pnl-member">— Helmy578 · Apr 2025</div></div>
-      <div class="pnl-card"><div class="pnl-pair">STO/USDT <span class="pnl-leverage">Long 15x</span></div><div class="pnl-roi">+574.97%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.12457</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.17232</span></div></div><div class="pnl-member">— Helmy578 · Apr 2025</div></div>
-      <div class="pnl-card"><div class="pnl-pair">ETH/USDT <span class="pnl-leverage">Long 100x</span></div><div class="pnl-roi">+326.07%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>2,040.00</span></div><div class="pnl-detail-item"><label>Exit</label><span>2,106.52</span></div></div><div class="pnl-member">— Ardiii · Apr 2025</div></div>
-      <div class="pnl-card"><div class="pnl-pair">ENA/USDT <span class="pnl-leverage">4H Setup</span></div><div class="pnl-roi">+13.54%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.0813</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.0966</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
-      <div class="pnl-card"><div class="pnl-pair">WLD/USDT <span class="pnl-leverage">2H Setup</span></div><div class="pnl-roi">+13.90%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.2414</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.2730</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
-      <div class="pnl-card"><div class="pnl-pair">BARD/USDT <span class="pnl-leverage">1H Setup</span></div><div class="pnl-roi">+12.12%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.3046</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.3371</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
-      <div class="pnl-card"><div class="pnl-pair">DOT/USDT <span class="pnl-leverage">2H Setup</span></div><div class="pnl-roi">+8.07%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>1.231</span></div><div class="pnl-detail-item"><label>Exit</label><span>1.327</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
-      <div class="pnl-card"><div class="pnl-pair">NOM/USDT <span class="pnl-leverage">1D Breakout</span></div><div class="pnl-roi">+245%</div><div class="pnl-detail"><div class="pnl-detail-item"><label>Entry</label><span>0.003457</span></div><div class="pnl-detail-item"><label>Exit</label><span>0.01252</span></div></div><div class="pnl-member">— Alpha Signal · Apr 2026</div></div>
-    </div>
-    <div class="proof-disclaimer">⚠️ <strong>Catatan:</strong> Hasil menggunakan leverage tinggi. ROI adalah ROI posisi leverage, bukan return modal keseluruhan. Hasil aktual tiap trader berbeda tergantung posisi dan manajemen risiko masing-masing.</div>
+
+<!-- TRACK RECORD -->
+<section class="section reveal">
+  <span class="eyebrow">// Member Results</span>
+  <h2 class="sh2">Hasil Nyata.<br>Bukan Rekayasa.</h2>
+  <p class="sp">Sinyal yang sudah terbukti. Entry, exit, dan ROI tercatat — bisa diverifikasi langsung oleh member.</p>
+  <div class="results-grid">
+    <div class="result-card big ca"><div class="rc-header"><span class="rc-pair">EDGE/USDT</span><span class="rc-tag">Long 25x</span></div><div class="rc-pct">+934.31%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>0.6965</span></div><div class="rc-det"><label>Exit</label><span>0.9568</span></div></div><div class="rc-meta">— Helmy578 · Apr 2025</div></div>
+    <div class="result-card big ca"><div class="rc-header"><span class="rc-pair">STO/USDT</span><span class="rc-tag">Long 15x</span></div><div class="rc-pct">+574.97%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>0.12457</span></div><div class="rc-det"><label>Exit</label><span>0.17232</span></div></div><div class="rc-meta">— Helmy578 · Apr 2025</div></div>
+    <div class="result-card ca"><div class="rc-header"><span class="rc-pair">ETH/USDT</span><span class="rc-tag">Long 100x</span></div><div class="rc-pct">+326.07%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>2,040.00</span></div><div class="rc-det"><label>Exit</label><span>2,106.52</span></div></div><div class="rc-meta">— Ardiii · Apr 2025</div></div>
+    <div class="result-card ca"><div class="rc-header"><span class="rc-pair">NOM/USDT</span><span class="rc-tag">1D Breakout</span></div><div class="rc-pct">+262%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>0.003457</span></div><div class="rc-det"><label>Exit</label><span>0.01252</span></div></div><div class="rc-meta">— Alpha Signal · Apr 2026</div></div>
+    <div class="result-card ca"><div class="rc-header"><span class="rc-pair">ENA/USDT</span><span class="rc-tag">4H Setup</span></div><div class="rc-pct">+13.54%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>0.0813</span></div><div class="rc-det"><label>Exit</label><span>0.0966</span></div></div><div class="rc-meta">— Alpha Signal · Apr 2026</div></div>
+    <div class="result-card ca"><div class="rc-header"><span class="rc-pair">WLD/USDT</span><span class="rc-tag">2H Setup</span></div><div class="rc-pct">+13.90%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>0.2414</span></div><div class="rc-det"><label>Exit</label><span>0.2730</span></div></div><div class="rc-meta">— Alpha Signal · Apr 2026</div></div>
+    <div class="result-card ca"><div class="rc-header"><span class="rc-pair">BARD/USDT</span><span class="rc-tag">1H Setup</span></div><div class="rc-pct">+12.12%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>0.3046</span></div><div class="rc-det"><label>Exit</label><span>0.3371</span></div></div><div class="rc-meta">— Alpha Signal · Apr 2026</div></div>
+    <div class="result-card ca"><div class="rc-header"><span class="rc-pair">DOT/USDT</span><span class="rc-tag">2H Setup</span></div><div class="rc-pct">+8.07%</div><div class="rc-detail"><div class="rc-det"><label>Entry</label><span>1.231</span></div><div class="rc-det"><label>Exit</label><span>1.327</span></div></div><div class="rc-meta">— Alpha Signal · Apr 2026</div></div>
   </div>
+  <div class="result-note">⚠️ <strong>Catatan:</strong> Hasil menggunakan leverage tinggi. ROI adalah ROI posisi leverage, bukan return modal keseluruhan. Hasil aktual tiap trader berbeda tergantung posisi dan manajemen risiko masing-masing.</div>
 </section>
-<section class="strategy">
-  <div class="section-label">// FRAMEWORK</div>
-  <h2 class="section-title">Strategi Utama</h2>
-  <div class="strategy-list">
-    <div class="strategy-item"><span class="strategy-num">01</span><div class="strategy-text"><strong>Multi-Timeframe Technical Analysis</strong><p>Konfirmasi dari HTF ke LTF. Tidak ada entry tanpa struktur jelas di semua timeframe relevan.</p></div></div>
-    <div class="strategy-item"><span class="strategy-num">02</span><div class="strategy-text"><strong>On-Chain Data Integration</strong><p>Data blockchain sebagai konfirmasi fundamental — evidence-based, bukan spekulasi.</p></div></div>
-    <div class="strategy-item"><span class="strategy-num">03</span><div class="strategy-text"><strong>Structured Futures Execution</strong><p>Entry, SL, dan TP ditentukan sebelum posisi dibuka. Emosi tidak masuk dalam eksekusi.</p></div></div>
-    <div class="strategy-item"><span class="strategy-num">04</span><div class="strategy-text"><strong>Reason-Based Entry & Exit</strong><p>Setiap keputusan ada alasannya. Tidak ada "feeling" — hanya struktur, data, dan probabilitas.</p></div></div>
-    <div class="strategy-item"><span class="strategy-num">05</span><div class="strategy-text"><strong>Advanced Risk & Capital Management</strong><p>Position sizing tepat. Drawdown control. Modal yang terjaga adalah senjata utama trader.</p></div></div>
-    <div class="strategy-item"><span class="strategy-num">06</span><div class="strategy-text"><strong>Market Sector Rotation Analysis</strong><p>Identifikasi sektor yang mendapat inflow institusional — masuk lebih awal, exit lebih bersih.</p></div></div>
-  </div>
-</section>
+
 <div class="divider"></div>
-<section class="signals">
-  <div class="signals-inner">
-    <div class="signals-header">
-      <div class="section-label">// RECENT SIGNALS — APRIL 2026</div>
-      <h2 class="section-title">Sinyal Terbaru.<br>Hasil Terverifikasi.</h2>
+
+<!-- RECENT SIGNALS -->
+<section class="section reveal" id="signals">
+  <span class="eyebrow">// Recent Signals — April 2026</span>
+  <h2 class="sh2">Sinyal Terbaru.<br>Hasil Terverifikasi.</h2>
+  <p class="sp">Entry, TP1, TP2, dan SL tercatat lengkap. Semua sinyal berbasis SMC/ICT framework.</p>
+  <div class="signals-grid">
+
+    <div class="signal-card ca">
+      <div class="sig-header"><span class="sig-pair">ENA/USDT</span><span class="sig-pct">+13.54%</span></div>
+      <div class="sig-type">4H · DESCENDING WEDGE BREAKOUT</div>
+      <div class="sig-levels">
+        <div class="sig-lev entry"><div class="sig-lev-label">ENTRY</div><div class="sig-lev-val">0.0813</div></div>
+        <div class="sig-lev sl"><div class="sig-lev-label">STOP LOSS</div><div class="sig-lev-val">0.0754</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 1</div><div class="sig-lev-val">0.0895</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 2</div><div class="sig-lev-val">0.0966</div></div>
+      </div>
+      <div class="sig-date">Apr 7–8, 2026</div>
     </div>
-    <div class="signals-grid">
-      <div class="signal-card">
-        <div class="signal-pair">ENA/USDT</div>
-        <div class="signal-tf">4H · DESCENDING WEDGE BREAKOUT</div>
-        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.0813</span></div>
-        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.0895</span></div>
-        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.0966</span></div>
-        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.0754</span></div>
-        <div class="signal-roi">+13.54%</div>
-        <div class="signal-date">Apr 7–8, 2026</div>
+
+    <div class="signal-card ca">
+      <div class="sig-header"><span class="sig-pair">WLD/USDT</span><span class="sig-pct">+13.90%</span></div>
+      <div class="sig-type">2H · DEMAND ZONE REACTION</div>
+      <div class="sig-levels">
+        <div class="sig-lev entry"><div class="sig-lev-label">ENTRY</div><div class="sig-lev-val">0.2414</div></div>
+        <div class="sig-lev sl"><div class="sig-lev-label">STOP LOSS</div><div class="sig-lev-val">0.2346</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 1</div><div class="sig-lev-val">0.2605</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 2</div><div class="sig-lev-val">0.2730</div></div>
       </div>
-      <div class="signal-card">
-        <div class="signal-pair">WLD/USDT</div>
-        <div class="signal-tf">2H · DEMAND ZONE REACTION</div>
-        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.2414</span></div>
-        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.2605</span></div>
-        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.2730</span></div>
-        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.2346</span></div>
-        <div class="signal-roi">+13.90%</div>
-        <div class="signal-date">Apr 7–8, 2026</div>
-      </div>
-      <div class="signal-card">
-        <div class="signal-pair">BARD/USDT</div>
-        <div class="signal-tf">1H · ORDER BLOCK ENTRY</div>
-        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.3046</span></div>
-        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.3230</span></div>
-        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.3371</span></div>
-        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.2907</span></div>
-        <div class="signal-roi">+12.12%</div>
-        <div class="signal-date">Apr 7–8, 2026</div>
-      </div>
-      <div class="signal-card">
-        <div class="signal-pair">DOT/USDT</div>
-        <div class="signal-tf">2H · DEMAND ZONE + BOS</div>
-        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">1.231</span></div>
-        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">1.277</span></div>
-        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">1.327</span></div>
-        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">1.200</span></div>
-        <div class="signal-roi">+8.07%</div>
-        <div class="signal-date">Apr 7–8, 2026</div>
-      </div>
-      <div class="signal-card">
-        <div class="signal-pair">NOM/USDT</div>
-        <div class="signal-tf">1D · DESCENDING WEDGE BREAKOUT</div>
-        <div class="signal-row"><span class="signal-label">ENTRY</span><span class="signal-val">0.003457</span></div>
-        <div class="signal-row"><span class="signal-label">TP1</span><span class="signal-val">0.008046</span></div>
-        <div class="signal-row"><span class="signal-label">TP2</span><span class="signal-val">0.01252</span></div>
-        <div class="signal-row"><span class="signal-label">SL</span><span class="signal-val">0.002800</span></div>
-        <div class="signal-roi">+262%</div>
-        <div class="signal-date">Apr 2, 2026</div>
-      </div>
-      <div class="signal-card" style="background:#0a1a0a">
-        <div class="signal-pair" style="color:var(--gold)">NEXT SIGNAL</div>
-        <div class="signal-tf">PREMIUM ONLY</div>
-        <div style="margin-top:20px;font-size:.78rem;color:var(--muted);line-height:1.7">Setup berikutnya hanya tersedia untuk member premium. Entry, TP, dan SL lengkap.</div>
-        <a href="https://t.me/soloadmin369" target="_blank" style="display:block;margin-top:20px;text-align:center;padding:10px;background:var(--gold);color:var(--black);font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none">Join Premium →</a>
-      </div>
+      <div class="sig-date">Apr 7–8, 2026</div>
     </div>
-    <div class="signals-note">📊 <strong>Metodologi:</strong> Semua sinyal berbasis SMC/ICT framework — identifikasi Order Block, Demand Zone, dan konfirmasi BOS/CHoCH pada multi-timeframe. Entry dilakukan setelah konfirmasi struktur, bukan prediksi arah semata.</div>
+
+    <div class="signal-card ca">
+      <div class="sig-header"><span class="sig-pair">BARD/USDT</span><span class="sig-pct">+12.12%</span></div>
+      <div class="sig-type">1H · ORDER BLOCK ENTRY</div>
+      <div class="sig-levels">
+        <div class="sig-lev entry"><div class="sig-lev-label">ENTRY</div><div class="sig-lev-val">0.3046</div></div>
+        <div class="sig-lev sl"><div class="sig-lev-label">STOP LOSS</div><div class="sig-lev-val">0.2907</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 1</div><div class="sig-lev-val">0.3230</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 2</div><div class="sig-lev-val">0.3371</div></div>
+      </div>
+      <div class="sig-date">Apr 7–8, 2026</div>
+    </div>
+
+    <div class="signal-card ca">
+      <div class="sig-header"><span class="sig-pair">DOT/USDT</span><span class="sig-pct">+8.07%</span></div>
+      <div class="sig-type">2H · DEMAND ZONE + BOS</div>
+      <div class="sig-levels">
+        <div class="sig-lev entry"><div class="sig-lev-label">ENTRY</div><div class="sig-lev-val">1.231</div></div>
+        <div class="sig-lev sl"><div class="sig-lev-label">STOP LOSS</div><div class="sig-lev-val">1.200</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 1</div><div class="sig-lev-val">1.277</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 2</div><div class="sig-lev-val">1.327</div></div>
+      </div>
+      <div class="sig-date">Apr 7–8, 2026</div>
+    </div>
+
+    <div class="signal-card ca">
+      <div class="sig-header"><span class="sig-pair">NOM/USDT</span><span class="sig-pct">+262%</span></div>
+      <div class="sig-type">1D · DESCENDING WEDGE BREAKOUT</div>
+      <div class="sig-levels">
+        <div class="sig-lev entry"><div class="sig-lev-label">ENTRY</div><div class="sig-lev-val">0.003457</div></div>
+        <div class="sig-lev sl"><div class="sig-lev-label">STOP LOSS</div><div class="sig-lev-val">0.002800</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 1</div><div class="sig-lev-val">0.008046</div></div>
+        <div class="sig-lev tp"><div class="sig-lev-label">TP 2</div><div class="sig-lev-val">0.01252</div></div>
+      </div>
+      <div class="sig-date">Apr 2, 2026</div>
+    </div>
+
+    <div class="signal-locked ca">
+      <div class="lock-icon">🔒</div>
+      <div class="lock-label">Next Signal — Premium Only</div>
+      <div class="lock-desc">Setup berikutnya hanya tersedia untuk member premium. Entry, TP, dan SL lengkap.</div>
+      <a href="https://t.me/soloadmin369" target="_blank" class="lock-btn">Join Premium →</a>
+    </div>
+
   </div>
+  <div class="sig-note">📊 <strong>Metodologi:</strong> Semua sinyal berbasis SMC/ICT framework — identifikasi Order Block, Demand Zone, dan konfirmasi BOS/CHoCH pada multi-timeframe. Entry dilakukan setelah konfirmasi struktur, bukan prediksi arah semata.</div>
 </section>
-<section class="slot-section">
-  <div class="slot-inner">
-    <div class="section-label" style="text-align:center">// SLOT TERSISA</div>
-    <h2 class="section-title" style="text-align:center">Founding Member<br><span style="color:var(--red)">Hampir Penuh</span></h2>
-    <div class="slot-counter">
-      <div class="slot-num-box">
-        <span class="slot-num green">270</span>
-        <div class="slot-num-label">Sudah Bergabung</div>
-      </div>
-      <div class="slot-divider">/</div>
-      <div class="slot-num-box">
-        <span class="slot-num" style="color:var(--muted)">300</span>
-        <div class="slot-num-label">Total Slot</div>
-      </div>
-      <div class="slot-divider">·</div>
-      <div class="slot-num-box">
-        <span class="slot-num red" id="remaining-slots">30</span>
-        <div class="slot-num-label">Slot Tersisa</div>
-      </div>
-    </div>
-    <div class="slot-progress-wrap">
-      <div class="slot-progress-fill" id="slot-progress" style="width:90%"></div>
-    </div>
-    <p class="slot-label">Ketika slot penuh, harga naik permanen. <strong>Daftar sekarang sebelum terlambat.</strong></p>
-    <a href="https://t.me/soloadmin369" target="_blank" class="btn-primary" style="display:inline-flex;margin:0 auto">🔒 Klaim Slot Sekarang</a>
-  </div>
-</section>
+
 <div class="divider"></div>
-<section class="pricing">
-  <div class="pricing-inner">
-    <div style="text-align:center"><div class="section-label" style="text-align:center">// PRICE LIST</div><h2 class="section-title">Pilih Paketmu</h2></div>
-    <div class="pricing-note">⚡ Harga founding member — diskon 50%. Naik seiring pertumbuhan komunitas.</div>
-    <div class="pricing-grid">
-      <div class="price-card"><div class="price-tier">2 BULAN</div><div class="price-original">Rp 500.000</div><div class="price-main"><span class="currency">Rp </span>300.000</div><div class="price-period">akses 2 bulan penuh</div><ul class="price-features"><li>Daily Scalping Call</li><li>Market Insight Harian</li><li>Swing Trade Setup</li><li>On-Chain Data Access</li><li>Private Consultation</li></ul><a href="https://t.me/soloadmin369" target="_blank" class="btn-join btn-join-outline">Join Sekarang →</a></div>
-      <div class="price-card featured"><div class="price-badge">POPULER</div><div class="price-tier">6 BULAN</div><div class="price-original">Rp 750.000</div><div class="price-main"><span class="currency">Rp </span>500.000</div><div class="price-period">akses 6 bulan penuh</div><ul class="price-features"><li>Daily Scalping Call</li><li>Market Insight Harian</li><li>Swing Trade Setup</li><li>On-Chain Data Access</li><li>Private Consultation</li><li class="extra">Hemat Rp 250.000</li></ul><a href="https://t.me/soloadmin369" target="_blank" class="btn-join btn-join-filled">Join Sekarang →</a></div>
-      <div class="price-card"><div class="price-tier">LIFETIME</div><div class="price-original" style="opacity:0">—</div><div class="price-main"><span class="currency">Rp </span>2.000.000</div><div class="price-period">akses selamanya</div><ul class="price-features"><li>Semua akses premium</li><li>Daily Scalping Call</li><li>Market Insight Harian</li><li>On-Chain Data Access</li><li>Private Consultation</li><li class="extra">64 E-Book Full Technical Analysis</li></ul><a href="https://t.me/soloadmin369" target="_blank" class="btn-join btn-join-outline">Join Sekarang →</a></div>
+
+<!-- STRATEGY -->
+<section class="section reveal">
+  <span class="eyebrow">// Framework</span>
+  <h2 class="sh2">Strategi Utama</h2>
+  <p class="sp">6 pilar metodologi yang membentuk setiap keputusan analisis dan sinyal kami.</p>
+  <div class="strategy-grid">
+    <div class="strat-item ca"><div class="strat-num">01</div><div class="strat-title">Multi-Timeframe Technical Analysis</div><div class="strat-desc">Konfirmasi dari HTF ke LTF. Tidak ada entry tanpa struktur jelas di semua timeframe relevan.</div></div>
+    <div class="strat-item ca"><div class="strat-num">02</div><div class="strat-title">On-Chain Data Integration</div><div class="strat-desc">Data blockchain sebagai konfirmasi fundamental — evidence-based, bukan spekulasi semata.</div></div>
+    <div class="strat-item ca"><div class="strat-num">03</div><div class="strat-title">Structured Futures Execution</div><div class="strat-desc">Entry, SL, dan TP ditentukan sebelum posisi dibuka. Emosi tidak masuk dalam eksekusi.</div></div>
+    <div class="strat-item ca"><div class="strat-num">04</div><div class="strat-title">Reason-Based Entry &amp; Exit</div><div class="strat-desc">Setiap keputusan ada alasannya. Tidak ada "feeling" — hanya struktur, data, dan probabilitas.</div></div>
+    <div class="strat-item ca"><div class="strat-num">05</div><div class="strat-title">Advanced Risk &amp; Capital Management</div><div class="strat-desc">Position sizing tepat. Drawdown control. Modal yang terjaga adalah senjata utama trader.</div></div>
+    <div class="strat-item ca"><div class="strat-num">06</div><div class="strat-title">Market Sector Rotation Analysis</div><div class="strat-desc">Identifikasi sektor yang mendapat inflow institusional — masuk lebih awal, exit lebih bersih.</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLOT COUNTER -->
+<section class="slot-section reveal">
+  <span class="eyebrow">// Slot Tersisa</span>
+  <h2 class="sh2">Founding Member<br>Hampir Penuh</h2>
+  <div class="slot-bar-wrap">
+    <div class="slot-nums">
+      <span class="slot-taken">270</span>
+      <span class="slot-slash">Sudah Bergabung</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--white-dim);">0</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--white-dim);">Total: 300 Slot</span>
+    </div>
+    <div class="slot-bar"><div class="slot-bar-fill" id="slotfill"></div></div>
+    <div class="slot-remaining">⚠️ 30 Slot Tersisa</div>
+    <div class="slot-sub">Ketika slot penuh, harga naik permanen. <strong>Daftar sekarang sebelum terlambat.</strong></div>
+  </div>
+  <button class="btn-main" onclick="window.open('https://t.me/soloadmin369','_blank')" style="margin:0 auto;display:inline-flex;">🔒 Klaim Slot Sekarang</button>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="section-sm reveal" id="pricing">
+  <span class="eyebrow" style="text-align:center;display:block;">// Price List</span>
+  <h2 class="sh2 section-center">Pilih Paketmu</h2>
+  <p class="sp section-center" style="margin:0 auto 8px;">⚡ Harga founding member — diskon 50%. Naik seiring pertumbuhan komunitas.</p>
+  <div class="pricing-grid">
+
+    <div class="pricing-card ca">
+      <div class="pc-tier">2 Bulan</div>
+      <div class="pc-name">Starter</div>
+      <div class="pc-orig">Rp 500.000</div>
+      <div class="pc-price">Rp 300.000</div>
+      <div class="pc-sub">akses 2 bulan penuh</div>
+      <ul class="pc-feats">
+        <li><span class="fc">✓</span>Daily Scalping Call</li>
+        <li><span class="fc">✓</span>Market Insight Harian</li>
+        <li><span class="fc">✓</span>Swing Trade Setup</li>
+        <li><span class="fc">✓</span>On-Chain Data Access</li>
+        <li><span class="fc">✓</span>Private Consultation</li>
+      </ul>
+      <button class="pc-btn pc-btn-g" onclick="window.open('https://t.me/soloadmin369','_blank')">Join Sekarang →</button>
+    </div>
+
+    <div class="pricing-card hc ca">
+      <div class="pop-badge">⭐ POPULER</div>
+      <div class="pc-tier">6 Bulan</div>
+      <div class="pc-name">Premium</div>
+      <div class="pc-orig">Rp 750.000</div>
+      <div class="pc-price">Rp 500.000</div>
+      <div class="pc-sub">akses 6 bulan penuh<br>hemat Rp 250.000</div>
+      <ul class="pc-feats">
+        <li><span class="fc">✓</span>Daily Scalping Call</li>
+        <li><span class="fc">✓</span>Market Insight Harian</li>
+        <li><span class="fc">✓</span>Swing Trade Setup</li>
+        <li><span class="fc">✓</span>On-Chain Data Access</li>
+        <li><span class="fc">✓</span>Private Consultation</li>
+        <li><span class="fc">✓</span><strong>Hemat Rp 250.000</strong></li>
+      </ul>
+      <button class="pc-btn pc-btn-gold" onclick="window.open('https://t.me/soloadmin369','_blank')">🔥 Join Sekarang →</button>
+    </div>
+
+    <div class="pricing-card ca">
+      <div class="pc-tier">Lifetime</div>
+      <div class="pc-name">Ultimate</div>
+      <div class="pc-price" style="font-size:30px;">Rp 2.000.000</div>
+      <div class="pc-sub">akses selamanya<br>bayar sekali, selesai</div>
+      <ul class="pc-feats">
+        <li><span class="fc">✓</span>Semua akses premium</li>
+        <li><span class="fc">✓</span>Daily Scalping Call</li>
+        <li><span class="fc">✓</span>Market Insight Harian</li>
+        <li><span class="fc">✓</span>On-Chain Data Access</li>
+        <li><span class="fc">✓</span>Private Consultation</li>
+        <li><span class="fc">✓</span><strong>64 E-Book Full Technical Analysis</strong></li>
+      </ul>
+      <button class="pc-btn pc-btn-g" onclick="window.open('https://t.me/soloadmin369','_blank')">Join Sekarang →</button>
+    </div>
+
+  </div>
+  <div class="pricing-note">🔒 Semua paket diproses manual oleh admin · Konfirmasi dalam 1×24 jam</div>
+</section>
+
+<!-- PAYMENT -->
+<section class="section-sm reveal" id="payment" style="padding-top:20px;">
+  <span class="eyebrow">// Cara Bayar</span>
+  <h2 class="sh2">Metode Pembayaran</h2>
+  <div class="pay-grid">
+    <div class="pay-card ca" onclick="copyToClipboard('7865604211',this)">
+      <span class="pay-copy-hint">tap to copy</span>
+      <div class="pay-method">BCA</div>
+      <div class="pay-number">7865604211</div>
+      <div class="pay-name">Ridho M-M</div>
+    </div>
+    <div class="pay-card ca" onclick="copyToClipboard('901299784773',this)">
+      <span class="pay-copy-hint">tap to copy</span>
+      <div class="pay-method">SeaBank</div>
+      <div class="pay-number">901299784773</div>
+      <div class="pay-name">Ridho M-M</div>
+    </div>
+    <div class="pay-card ca" onclick="copyToClipboard('081327494460',this)">
+      <span class="pay-copy-hint">tap to copy</span>
+      <div class="pay-method">GoPay</div>
+      <div class="pay-number">081327494460</div>
+      <div class="pay-name">Ridho M-M</div>
+    </div>
+    <div class="pay-card ca" onclick="copyToClipboard('202768946',this)">
+      <span class="pay-copy-hint">tap to copy</span>
+      <div class="pay-method">Binance Pay</div>
+      <div class="pay-number">202768946</div>
+      <div class="pay-name">369 Global</div>
+    </div>
+  </div>
+  <div class="pay-warn">⛔ <strong>PERINGATAN:</strong> Hanya transfer ke rekening atas nama di atas. Kirim bukti pembayaran ke <strong>@soloadmin369</strong> di Telegram. Waspada penipuan yang mengatasnamakan Alpha Crypto 369.</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="section-sm reveal">
+  <span class="eyebrow" style="text-align:center;display:block;">// Cara Kerja</span>
+  <h2 class="sh2 section-center">3 Langkah Mudah</h2>
+  <div class="steps-list">
+    <div class="step-item ca">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Pilih Paket &amp; Lakukan Transfer</div>
+        <div class="step-desc">Pilih paket yang sesuai (2 Bulan / 6 Bulan / Lifetime) lalu transfer ke salah satu rekening yang tersedia. Simpan screenshot bukti transfernya.</div>
+      </div>
+    </div>
+    <div class="step-item ca">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Kirim Bukti ke Admin</div>
+        <div class="step-desc">Hubungi <strong>@soloadmin369</strong> di Telegram. Kirim screenshot bukti transfer + nama lengkap + paket yang dipilih. Admin merespons dalam 1×24 jam.</div>
+      </div>
+    </div>
+    <div class="step-item ca">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Dapatkan Akses &amp; Mulai Trade</div>
+        <div class="step-desc">Setelah konfirmasi, kamu langsung mendapat invite ke grup Premium Telegram, akses tools eksklusif, welcome kit member, dan panduan onboarding.</div>
+      </div>
     </div>
   </div>
 </section>
-<section class="payment">
-  <div class="section-label">// CARA BAYAR</div>
-  <h2 class="section-title">Metode Pembayaran</h2>
-  <div class="payment-grid">
-    <div class="payment-item"><div class="payment-bank">BCA</div><div class="payment-number">7865604211</div><div class="payment-name">Ridho M-M</div></div>
-    <div class="payment-item"><div class="payment-bank">SeaBank</div><div class="payment-number">901299784773</div><div class="payment-name">Ridho M-M</div></div>
-    <div class="payment-item"><div class="payment-bank">GoPay</div><div class="payment-number">081327494460</div><div class="payment-name">Ridho M-M</div></div>
-    <div class="payment-item"><div class="payment-bank">Binance Pay</div><div class="payment-number">202768946</div><div class="payment-name">369 Global</div></div>
+
+<div class="divider"></div>
+
+<!-- BIG QUOTE -->
+<div class="bigquote">
+  <div class="bq-glow"></div>
+  <div class="bq-content reveal">
+    <div class="bq-mark">"</div>
+    <div class="bq-text">Trader yang sukses bukan yang paling pintar.<br>Tapi yang paling <em>konsisten, disiplin,<br>dan belajar dari sistem yang benar.</em></div>
+    <div class="bq-author">— Alpha Crypto 369 · No Hype. No Rumor. No FOMO.</div>
   </div>
-  <div class="payment-warning">⛔ <strong>PERINGATAN:</strong> Hanya transfer ke rekening atas nama di atas. Kirim bukti pembayaran ke <strong>@soloadmin369</strong>.</div>
-</section>
-<section class="risk-section">
-  <div class="risk-box">
-    <div class="risk-title">⚠️ PERINGATAN RISIKO TINGGI</div>
-    <p class="risk-text">Trading cryptocurrency mengandung risiko tinggi dan <strong>tidak menjamin profit</strong>. Kerugian dapat terjadi kapan saja. Grup ini menyediakan edukasi dan analisis — bukan rekomendasi investasi. Gunakan hanya modal yang siap hilang.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section class="section reveal">
+  <span class="eyebrow" style="text-align:center;display:block;">// Kata Member</span>
+  <h2 class="sh2 section-center">Mereka Sudah<br>Merasakannya</h2>
+  <div class="testi-grid">
+    <div class="testi-card ca">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"Sebelum gabung aku trading pakai feeling. Setelah belajar SMC di sini, win rate naik signifikan. Daily scalping call-nya sangat terstruktur, ada entry, SL, dan TP yang jelas."</div>
+      <div class="testi-author"><div class="testi-avatar">🧑</div><div><div class="testi-name">Rizky A.</div><div class="testi-role">Premium Member · Trader sejak 2021</div></div></div>
+    </div>
+    <div class="testi-card ca">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"Weekly report-nya sangat detail. Ada level spesifik, reasoning lengkap, dan risk plan. Bukan cuma bilang 'bullish' — ada penjelasan kenapa dan di mana SL-nya."</div>
+      <div class="testi-author"><div class="testi-avatar">👩</div><div><div class="testi-name">Dewi S.</div><div class="testi-role">Premium Member · Investor &amp; Swing Trader</div></div></div>
+    </div>
+    <div class="testi-card ca">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"Invest di lifetime member paling worth it. 64 e-book + private consultation + sinyal real time. Framework SMC-nya solid dan terbukti. Dalam 3 bulan sudah balik modal."</div>
+      <div class="testi-author"><div class="testi-avatar">👨</div><div><div class="testi-name">Fandi R.</div><div class="testi-role">Lifetime Member · Day Trader Full-time</div></div></div>
+    </div>
   </div>
 </section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="section-sm reveal" id="faq">
+  <span class="eyebrow" style="text-align:center;display:block;">// FAQ</span>
+  <h2 class="sh2 section-center">Pertanyaan yang<br>Sering Ditanyakan</h2>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Berapa harga dan apa saja paketnya?<div class="faq-icon">+</div></div><div class="faq-a">Tersedia 3 paket: (1) 2 Bulan seharga Rp 300.000, (2) 6 Bulan seharga Rp 500.000 — hemat Rp 250.000, dan (3) Lifetime seharga Rp 2.000.000 dengan akses selamanya termasuk 64 e-book eksklusif dan semua update fitur ke depan.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Bagaimana cara melakukan pembayaran?<div class="faq-icon">+</div></div><div class="faq-a">Transfer ke salah satu rekening yang tersedia: BCA (7865604211), SeaBank (901299784773), GoPay (081327494460), atau Binance Pay (202768946) atas nama Ridho M-M / 369 Global. Setelah transfer, kirim bukti ke @soloadmin369 di Telegram.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Berapa lama proses konfirmasi akses?<div class="faq-icon">+</div></div><div class="faq-a">Admin memproses dalam 1×24 jam setelah menerima bukti pembayaran. Biasanya jauh lebih cepat di jam aktif (pagi-malam WIB).</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Apakah sinyal dijamin profit?<div class="faq-icon">+</div></div><div class="faq-a">Tidak. Tidak ada yang bisa menjamin profit di pasar keuangan dan kami tidak pernah mengklaim demikian. Yang kami berikan adalah metodologi terstruktur, analisis berkualitas tinggi, dan framework yang terbukti. Keputusan final selalu ada di tanganmu.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Apakah cocok untuk pemula?<div class="faq-icon">+</div></div><div class="faq-a">Ya, sangat cocok. Ada kurikulum 30 hari gratis di channel free untuk membangun fondasi sebelum masuk ke analisis Premium yang lebih advanced. Link: thestrategymoon-crypto.github.io/JAGO-TRADING-DALAM-30-HARI-/</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Apa bedanya dengan channel sinyal biasa?<div class="faq-icon">+</div></div><div class="faq-a">Kami mengajarkan cara berpikir dan analisis, bukan sekadar memberi sinyal. Tujuannya menjadikanmu trader mandiri — bukan ketergantungan. Framework yang digunakan berbasis SMC/ICT dengan konfirmasi on-chain data. No hype, no rumor, no FOMO.</div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Apa yang terjadi setelah slot 300 penuh?<div class="faq-icon">+</div></div><div class="faq-a">Setelah 300 founding member terpenuhi, harga akan naik permanen mengikuti pertumbuhan komunitas. Harga founding member (Rp 300.000 / 500.000 / 2.000.000) tidak akan tersedia lagi. Daftar sekarang untuk mengunci harga terbaik.</div></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
 <section class="final-cta">
-  <h2>Siap Trade<br><span style="color:var(--gold)">Lebih Serius?</span></h2>
-  <p>Bukan untuk semua orang. Hanya untuk yang benar-benar mau belajar dan disiplin.</p>
-  <a href="https://t.me/soloadmin369" target="_blank" class="btn-primary">💬 PM @soloadmin369 Sekarang</a>
+  <div class="fcta-bg"></div>
+  <div class="fcta-grid"></div>
+  <div class="fcta-content reveal">
+    <div class="fcta-tag">✦ Siap Trade Lebih Serius?</div>
+    <div class="fcta-h2">Bukan untuk<br>semua orang.<br><span>Hanya untuk yang serius.</span></div>
+    <p class="fcta-p">Hanya untuk yang benar-benar mau belajar dan disiplin. Harga founding member tidak akan bertahan selamanya — 30 slot tersisa sebelum harga naik permanen.</p>
+    <div class="hero-btns">
+      <button class="btn-main" onclick="window.open('https://t.me/soloadmin369','_blank')">💬 PM @soloadmin369 Sekarang</button>
+      <a href="https://thestrategymoon-crypto.github.io/JAGO-TRADING-DALAM-30-HARI-/" target="_blank" class="btn-ghost">Coba Gratis 30 Hari →</a>
+    </div>
+    <div class="fcta-note">🔒 Aman · ⚡ Konfirmasi Cepat · 🇮🇩 Khusus Indonesia · No Hype · No Rumor · No FOMO</div>
+  </div>
 </section>
+
+<!-- RISK WARNING -->
+<div class="risk-section">
+  <div class="risk-box">⚠️ <strong>PERINGATAN RISIKO TINGGI:</strong> Trading cryptocurrency mengandung risiko tinggi dan <strong>tidak menjamin profit</strong>. Kerugian dapat terjadi kapan saja. Grup ini menyediakan edukasi dan analisis — bukan rekomendasi investasi. Gunakan hanya modal yang siap hilang.
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <span>© 2025 Alpha Crypto 369</span>
-  <span>No hype. No rumor. No FOMO.</span>
+  <div class="footer-inner">
+    <div class="footer-brand">Alpha Crypto 369</div>
+    <div class="footer-tagline">No Hype · No Rumor · No FOMO</div>
+    <div class="footer-links">
+      <a href="https://t.me/Alphacrypto_id" target="_blank">Channel Free</a>
+      <a href="https://thestrategymoon-crypto.github.io/JAGO-TRADING-DALAM-30-HARI-/" target="_blank">Kurikulum 30 Hari</a>
+      <a href="https://lynk.id/alphacrypto.id" target="_blank">Lynk.id</a>
+      <a href="https://t.me/soloadmin369" target="_blank">Hubungi Admin</a>
+    </div>
+    <div class="footer-copy">© 2025 Alpha Crypto 369 · Tempatnya Trader &amp; Investor Indonesia · @Alphacrypto_id</div>
+  </div>
 </footer>
+
 <script>
-// Slot counter animation
-window.addEventListener('load', function() {
-  const total = 300;
-  const joined = 270;
-  const remaining = total - joined;
-  const pct = (joined / total) * 100;
+// SMOOTH SCROLL
+function goTo(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
 
-  // Update mini bar in urgency strip
-  const miniBar = document.getElementById('mini-bar');
-  if(miniBar) setTimeout(() => miniBar.style.width = pct + '%', 300);
-
-  // Animate remaining slots counting down
-  const remainEl = document.getElementById('remaining-slots');
-  const slotRemainEl = document.getElementById('slot-remain');
-  if(remainEl) {
-    let count = remaining + 8;
-    const interval = setInterval(() => {
-      count--;
-      remainEl.textContent = count;
-      if(slotRemainEl) slotRemainEl.textContent = count;
-      if(count <= remaining) clearInterval(interval);
-    }, 80);
+// COUNTDOWN
+(function(){
+  var KEY='ac369v4';
+  var end=parseInt(sessionStorage.getItem(KEY)||'0');
+  if(!end||end<Date.now()){end=Date.now()+24*60*60*1000;sessionStorage.setItem(KEY,String(end));}
+  function tick(){
+    var diff=Math.max(0,end-Date.now());
+    var h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    var eh=document.getElementById('cdh'),em=document.getElementById('cdm'),es=document.getElementById('cds');
+    if(eh)eh.textContent=('0'+h).slice(-2);
+    if(em)em.textContent=('0'+m).slice(-2);
+    if(es)es.textContent=('0'+s).slice(-2);
+    if(diff>0)setTimeout(tick,1000);
   }
+  tick();
+})();
 
-  // Progress bar
-  const prog = document.getElementById('slot-progress');
-  if(prog) setTimeout(() => prog.style.width = pct + '%', 500);
+// FAQ
+function toggleFaq(el){
+  var open=el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open');});
+  if(!open)el.classList.add('open');
+}
+
+// COPY TO CLIPBOARD
+function copyToClipboard(text,el){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      var hint=el.querySelector('.pay-copy-hint');
+      if(hint){hint.textContent='Disalin!';hint.style.color='var(--green)';setTimeout(function(){hint.textContent='tap to copy';hint.style.color='';},2000);}
+    });
+  }
+}
+
+// SLOT BAR ANIMATION
+setTimeout(function(){
+  var fill=document.getElementById('slotfill');
+  if(fill)fill.style.width='90%';
+},600);
+
+// SCROLL REVEAL
+(function(){
+  var o1=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:0.07});
+  document.querySelectorAll('.reveal').forEach(function(el){o1.observe(el);});
+
+  var o2=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var d=parseInt(e.target.dataset.i||'0')*90;
+        var el=e.target;
+        setTimeout(function(){el.classList.add('visible');},d);
+      }
+    });
+  },{threshold:0.04});
+  document.querySelectorAll('.ca').forEach(function(el,i){
+    el.dataset.i=String(i%5);
+    o2.observe(el);
+  });
+})();
+
+// NAV SHRINK
+window.addEventListener('scroll',function(){
+  var nav=document.getElementById('nav');
+  if(nav)nav.style.padding=window.scrollY>80?'11px 32px':'16px 32px';
 });
 </script>
 </body>
